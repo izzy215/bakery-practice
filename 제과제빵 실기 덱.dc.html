@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#2A231C;font-family:'Noto Sans KR',sans-serif}
+</style>
+</helmet>
+
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="표지" data-speaker-notes="제과·제빵기능사 실기 40품목을 한눈에 정리한 덱입니다." style="width:1920px;height:1080px;box-sizing:border-box;background:#A0511E;color:#FFF6EC;padding:130px 150px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden">
+    <div style="position:absolute;right:-120px;top:-120px;width:620px;height:620px;border-radius:50%;background:#8A400F"></div>
+    <div style="position:absolute;right:150px;bottom:-160px;width:420px;height:420px;border-radius:50%;background:#B5652E;opacity:.55"></div>
+    <div style="position:relative;font-size:26px;font-weight:700;letter-spacing:8px;color:#F4C89A">국가기술자격 실기시험</div>
+    <h1 style="position:relative;margin:22px 0 0;font-size:118px;font-weight:900;line-height:1.02;letter-spacing:-3px">제과·제빵기능사<br>실기 연습</h1>
+    <p style="position:relative;margin:40px 0 0;font-size:34px;font-weight:500;color:#FBE3CC;max-width:1100px">공개문제 40품목 · 시험지 재현 · 공정 흐름 · 합격 공략</p>
+    <div style="position:relative;margin-top:70px;display:flex;gap:16px">
+      <span style="font-size:26px;font-weight:700;background:#FFF6EC;color:#A0511E;border-radius:99px;padding:14px 30px">제과 20품목</span>
+      <span style="font-size:26px;font-weight:700;background:#6E6118;color:#FCF8E8;border-radius:99px;padding:14px 30px">제빵 20품목</span>
+    </div>
+  </section>
+
+  <section data-label="시험 개요" data-speaker-notes="두 자격증의 기본 흐름과 채점 관점을 안내합니다." style="width:1920px;height:1080px;box-sizing:border-box;background:#F7F1E7;color:#3B2E22;padding:110px 150px;display:flex;flex-direction:column">
+    <div style="font-size:24px;font-weight:700;color:#A0511E;letter-spacing:3px">OVERVIEW</div>
+    <h2 style="margin:14px 0 60px;font-size:70px;font-weight:900;letter-spacing:-1.5px">시험은 이렇게 흐른다</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:26px">
+      <sc-for list="{{flow}}" as="f" hint-placeholder-count="4">
+        <div style="background:#FFFDF9;border:1px solid #E8DCC9;border-radius:22px;padding:38px 34px;display:flex;flex-direction:column;gap:16px">
+          <div style="width:64px;height:64px;border-radius:50%;background:#A0511E;color:#FFF6EC;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900">{{f.num}}</div>
+          <div style="font-size:34px;font-weight:900">{{f.t}}</div>
+          <div style="font-size:23px;line-height:1.55;color:#6B5A48">{{f.d}}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:auto;display:flex;gap:22px">
+      <div style="flex:1;background:#F3E1CD;border-radius:18px;padding:30px 36px;font-size:25px;line-height:1.6;color:#7A4415"><strong style="font-size:28px">채점 핵심</strong><br>계량 정확도 · 반죽온도 · 비중 · 성형 균일 · 껍질색 · 위생</div>
+      <div style="flex:1;background:#EBE6CB;border-radius:18px;padding:30px 36px;font-size:25px;line-height:1.6;color:#5E5410"><strong style="font-size:28px">공통 실격</strong><br>미완성 · 제법 위반 · 미숙/탄 제품 · 위생 심각 위반 · 부정행위</div>
+    </div>
+  </section>
+
+  <section data-label="제과 20품목" data-speaker-notes="제과기능사 20품목 전체 목록입니다." style="width:1920px;height:1080px;box-sizing:border-box;background:#FBF3E8;color:#3B2E22;padding:100px 130px;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:baseline;gap:22px">
+      <span style="font-size:34px;font-weight:900;background:#A0511E;color:#FFF6EC;border-radius:14px;padding:10px 24px">제과</span>
+      <h2 style="margin:0;font-size:60px;font-weight:900;letter-spacing:-1px">제과기능사 20품목</h2>
+    </div>
+    <div style="margin-top:50px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
+      <sc-for list="{{gwaList}}" as="c" hint-placeholder-count="20">
+        <div style="background:#FFFDF9;border:1px solid #EAD9BF;border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:7px">
+          <div style="font-size:27px;font-weight:800;line-height:1.25">{{c.name}}</div>
+          <div style="font-size:19px;color:#8A7360">{{c.method}} · {{c.time}}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-label="제빵 20품목" data-speaker-notes="제빵기능사 20품목 전체 목록입니다." style="width:1920px;height:1080px;box-sizing:border-box;background:#F6F4E6;color:#3B2E22;padding:100px 130px;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:baseline;gap:22px">
+      <span style="font-size:34px;font-weight:900;background:#6E6118;color:#FCF8E8;border-radius:14px;padding:10px 24px">제빵</span>
+      <h2 style="margin:0;font-size:60px;font-weight:900;letter-spacing:-1px">제빵기능사 20품목</h2>
+    </div>
+    <div style="margin-top:50px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
+      <sc-for list="{{breadList}}" as="c" hint-placeholder-count="20">
+        <div style="background:#FFFEF7;border:1px solid #E4E0C4;border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:7px">
+          <div style="font-size:27px;font-weight:800;line-height:1.25">{{c.name}}</div>
+          <div style="font-size:19px;color:#7C7550">{{c.method}} · {{c.time}}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <sc-for list="{{details}}" as="it" hint-placeholder-count="6">
+    <section data-label="{{it.name}}" data-speaker-notes="{{it.notes}}" style="width:1920px;height:1080px;box-sizing:border-box;background:#F7F1E7;color:#3B2E22;padding:80px 110px 70px;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <span style="font-size:26px;font-weight:800;border-radius:12px;padding:8px 20px;background:{{it.badgeBg}};color:{{it.badgeFg}}">{{it.exam}}</span>
+        <h2 style="margin:0;font-size:60px;font-weight:900;letter-spacing:-1.5px">{{it.name}}</h2>
+        <div style="margin-left:auto;display:flex;gap:12px;flex-wrap:wrap">
+          <span style="font-size:22px;font-weight:600;background:#EFE3D0;border-radius:10px;padding:9px 18px;white-space:nowrap">{{it.time}}</span>
+          <span style="font-size:22px;font-weight:600;background:#EFE3D0;border-radius:10px;padding:9px 18px;white-space:nowrap">{{it.method}}</span>
+          <sc-if value="{{it.hasTemp}}" hint-placeholder-val="{{ false }}"><span style="font-size:22px;font-weight:600;background:#EFE3D0;border-radius:10px;padding:9px 18px;white-space:nowrap">반죽온도 {{it.temp}}</span></sc-if>
+          <sc-if value="{{it.hasGravity}}" hint-placeholder-val="{{ false }}"><span style="font-size:22px;font-weight:600;background:#EFE3D0;border-radius:10px;padding:9px 18px;white-space:nowrap">비중 {{it.gravity}}</span></sc-if>
+        </div>
+      </div>
+
+      <div style="margin-top:44px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:44px;flex:1;min-height:0">
+
+        <div style="background:#FFFFFF;border:1.5px solid #2E2A24;border-radius:6px;padding:34px 36px;display:flex;flex-direction:column;font-family:'Nanum Myeongjo',serif;overflow:hidden">
+          <div style="font-size:30px;font-weight:800;border-bottom:2px solid #2E2A24;padding-bottom:14px;margin-bottom:8px">배합표</div>
+          <div style="columns:2;column-gap:34px">
+            <sc-for list="{{it.ings}}" as="g" hint-placeholder-count="9">
+              <div style="display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dotted #C9BBA3;break-inside:avoid;font-size:22px"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{g.n}}</span><span style="font-weight:700;white-space:nowrap">{{g.w}}g</span></div>
+            </sc-for>
+          </div>
+          <div style="margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;font-size:24px;font-weight:800;border-top:2px solid #2E2A24"><span>합계</span><span>{{it.totalW}}g</span></div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+            <div style="font-size:28px;font-weight:900;color:#A0511E;margin-bottom:14px">공정 흐름</div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+              <sc-for list="{{it.steps}}" as="st" hint-placeholder-count="8">
+                <span style="font-size:22px;font-weight:700;background:#FFFDF9;border:1px solid #E0CFB4;border-radius:99px;padding:11px 20px;white-space:nowrap">{{st.t}}</span>
+                <span style="color:#C29A6A;font-size:22px;font-weight:900">{{st.arrow}}</span>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#EDF4E8;border-radius:18px;padding:28px 34px">
+            <div style="font-size:26px;font-weight:900;color:#3E7A3E;margin-bottom:14px">합격 팁</div>
+            <div style="display:flex;flex-direction:column;gap:11px">
+              <sc-for list="{{it.tips}}" as="tp" hint-placeholder-count="3">
+                <div style="display:flex;gap:12px;font-size:23px;line-height:1.5;color:#4A5C42"><span style="color:#3E7A3E;font-weight:900">✓</span><span>{{tp.text}}</span></div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-for>
+
+  <section data-label="마무리" data-speaker-notes="응시 전 큐넷 최신 공개문제와 대조하세요." style="width:1920px;height:1080px;box-sizing:border-box;background:#3B2E22;color:#F7F1E7;padding:150px;display:flex;flex-direction:column;justify-content:center">
+    <div style="font-size:26px;font-weight:700;letter-spacing:6px;color:#D9A876">CHECKLIST</div>
+    <h2 style="margin:20px 0 50px;font-size:88px;font-weight:900;letter-spacing:-2px">시험장에서 기억할 것</h2>
+    <div style="display:flex;flex-direction:column;gap:26px;font-size:34px;line-height:1.4">
+      <div style="display:flex;gap:22px;align-items:center"><span style="color:#E8A34C;font-weight:900">01</span><span>계량 시간·정확도 — 흘리지 말고 재료별로 진열</span></div>
+      <div style="display:flex;gap:22px;align-items:center"><span style="color:#E8A34C;font-weight:900">02</span><span>반죽온도·비중은 감독위원이 직접 확인하는 항목</span></div>
+      <div style="display:flex;gap:22px;align-items:center"><span style="color:#E8A34C;font-weight:900">03</span><span>성형 균일·껍질색·위생까지가 채점 대상</span></div>
+      <div style="display:flex;gap:22px;align-items:center"><span style="color:#E8A34C;font-weight:900">04</span><span>미완성·제법 위반·부정행위는 곧바로 실격</span></div>
+    </div>
+    <p style="margin-top:70px;font-size:24px;color:#B7A48E">※ 배합표·시간은 표준 공개문제 기준 — 응시 전 큐넷 최신 공개문제를 확인하세요.</p>
+  </section>
+
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { items: null };
+  componentDidMount() {
+    fetch('./items-data.json').then(r => r.json()).then(d => this.setState({ items: d.items }));
+  }
+  renderVals() {
+    const items = this.state.items || [];
+    const flow = [
+      { num: 1, t: '재료 계량', d: '배합표대로 재료별 계량·진열. 제한 시간·손실 채점.' },
+      { num: 2, t: '반죽', d: '제법별 반죽 완성. 반죽온도(·비중)를 표준에 맞춤.' },
+      { num: 3, t: '발효·성형', d: '제빵은 1·2차 발효, 제과는 팬닝. 균일함이 관건.' },
+      { num: 4, t: '굽기·제출', d: '색·익힘·모양을 완성해 전량 제출. 위생 정리.' }
+    ];
+    const brief = x => ({ name: x.name, method: x.method, time: x.time });
+    const gwaList = items.filter(x => x.exam === '제과').map(brief);
+    const breadList = items.filter(x => x.exam === '제빵').map(brief);
+
+    const details = items.filter(x => x.detailed).map(x => {
+      const steps = (x.steps || []).map((st, i, arr) => ({ t: st.t, arrow: i < arr.length - 1 ? '→' : '' }));
+      const tips = (x.tips || []).slice(0, 3).map(text => ({ text }));
+      return {
+        name: x.name, exam: x.exam,
+        badgeBg: x.exam === '제과' ? '#A0511E' : '#6E6118',
+        badgeFg: x.exam === '제과' ? '#FFF6EC' : '#FCF8E8',
+        time: x.time, method: x.method,
+        hasTemp: !!x.temp, temp: x.temp || '',
+        hasGravity: !!x.gravity, gravity: x.gravity || '',
+        ings: x.ingredients || [], totalW: x.totalW || '',
+        steps, tips,
+        notes: x.summary || ''
+      };
+    });
+
+    return { flow, gwaList, breadList, details };
+  }
+}
+</script>
+</body>
+</html>

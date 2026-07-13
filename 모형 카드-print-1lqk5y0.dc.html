@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style data-omelette-print-defaults>
+@media print {
+  @page { margin: 0.5in; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+  figure, table, pre, blockquote, img, svg, tr, [class~="card" i] { break-inside: avoid; }
+  img, svg { max-width: 100%; }
+  p { orphans: 3; widows: 3; }
+}
+</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Noto Sans KR',sans-serif;color:#3B2E22}
+a{color:#A05A24}a:hover{color:#7C4218}
+doc-page:not(:defined){visibility:hidden}
+@media print{.no-print{display:none !important}}
+</style>
+</helmet>
+
+<div class="no-print" style="max-width:210mm;margin:0 auto;padding:18px 20px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+  <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+    <a href="제과제빵 실기 연습.dc.html" style="font-size:14px;font-weight:700;text-decoration:none">← 연습 앱으로</a>
+    <div style="display:flex;gap:0;border:1.5px solid #D9CBB6;border-radius:99px;overflow:hidden">
+      <sc-if value="{{isA}}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{showA}}" style="border:none;background:#A0511E;color:#FFF6EC;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer">A안 · 카드+보드</button>
+        <button onClick="{{showB}}" style="border:none;background:#FFFDF9;color:#6B5A48;padding:7px 16px;font-size:13px;font-weight:500;cursor:pointer">B안 · 실습 보드</button>
+      </sc-if>
+      <sc-if value="{{isB}}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{showA}}" style="border:none;background:#FFFDF9;color:#6B5A48;padding:7px 16px;font-size:13px;font-weight:500;cursor:pointer">A안 · 카드+보드</button>
+        <button onClick="{{showB}}" style="border:none;background:#6E6118;color:#FCF8E8;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer">B안 · 실습 보드</button>
+      </sc-if>
+    </div>
+  </div>
+  <span style="font-size:12.5px;color:#8A7360">인쇄(Ctrl/Cmd+P) 후 점선을 따라 오려서 사용하세요</span>
+</div>
+
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" size="a4" margin="12mm" hint-size="100%,1400px">
+
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid #3B2E22;padding-bottom:8px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <sc-if value="{{iconsReady}}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;width:48px;height:48px;background-image:url('{{productIcon}}');background-size:contain;background-repeat:no-repeat;background-position:center"></span></sc-if>
+      <span style="font-size:22px;font-weight:900">{{titlePrefix}} <span style="color:#A0511E">{{iName}}</span> <span style="font-size:14px;color:#6B5A48;background:#F1EADF;border-radius:99px;padding:3px 10px;vertical-align:middle">{{modeBadge}}</span></span>
+    </div>
+    <div style="font-size:12px;color:#8A7360">{{iExamFull}} · {{iTime}} · {{iMethod}}</div>
+  </div>
+
+  <!-- ============ A안 ============ -->
+  <sc-if value="{{isA}}" hint-placeholder-val="{{ true }}">
+  <p style="margin:8px 0 14px;font-size:12px;color:#6B5A48;line-height:1.6">점선을 따라 카드를 오린 뒤, 뒤쪽 작업대 보드 위에서 실제 시험처럼 배치하며 연습하세요. ① 재료 카드를 계량대에 진열 → ② 공정 카드를 순서대로 배치 → ③ 정답표로 확인.</p>
+
+  <div style="font-size:15px;font-weight:900;margin:6px 0 8px;color:#8A4A15">1. 재료 카드 — 계량 진열용 ({{ingCount}}장)</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6mm">
+    <sc-for list="{{ingCards}}" as="g" hint-placeholder-count="9">
+      <div style="border:1.5px dashed #B3A48C;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;height:32mm;box-sizing:border-box;overflow:hidden;break-inside:avoid;background:#FFFDF9">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:10px;font-weight:700;color:#8A4A15;background:#F3E1CD;border-radius:99px;padding:2px 8px">재료</span>
+          <span style="font-size:10px;color:#B3A48C">✂</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px"><sc-if value="{{iconsReady}}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;flex:none;width:46px;height:46px;background-image:url('{{g.iconSrc}}');background-size:contain;background-repeat:no-repeat;background-position:center"></span></sc-if><span style="font-size:15px;font-weight:900">{{g.n}}</span></div>
+        <div style="font-size:12px;color:#5C4C3B;margin-top:auto"><strong>{{g.w}}g</strong> · {{g.r}}%</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="font-size:15px;font-weight:900;margin:8mm 0 8px;color:#8A4A15">2. 도구 카드 ({{toolCount}}장)</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6mm">
+    <sc-for list="{{toolCards}}" as="t" hint-placeholder-count="9">
+      <div style="border:1.5px dashed #B3A48C;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;height:26mm;box-sizing:border-box;overflow:hidden;break-inside:avoid;background:#FFFDF9">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:10px;font-weight:700;color:#6A5D12;background:#EBE6CB;border-radius:99px;padding:2px 8px">도구</span>
+          <span style="font-size:10px;color:#B3A48C">✂</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px"><sc-if value="{{iconsReady}}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;flex:none;width:44px;height:44px;background-image:url('{{t.iconSrc}}');background-size:contain;background-repeat:no-repeat;background-position:center"></span></sc-if><span style="font-size:14px;font-weight:900">{{t.n}}</span></div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="break-before:page"></div>
+
+  <div style="font-size:15px;font-weight:900;margin:0 0 4px;color:#8A4A15">3. 공정 카드 ({{stepCount}}장) — 번호 없음, 순서 맞추기용</div>
+  <p style="margin:0 0 10px;font-size:11.5px;color:#6B5A48">카드를 섞은 뒤 순서대로 배열해 보세요. 정답은 아래 정답표(접어서 가리기)에 있습니다.</p>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:5mm">
+    <sc-for list="{{stepCards}}" as="st" hint-placeholder-count="8">
+      <div style="border:1.5px dashed #B3A48C;border-radius:10px;padding:11px 13px;display:flex;flex-direction:column;gap:5px;height:37mm;box-sizing:border-box;overflow:hidden;break-inside:avoid;background:#FFFDF9">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:10px;font-weight:700;color:#FFF6EC;background:#A0511E;border-radius:99px;padding:2px 8px">공정</span>
+          <sc-if value="{{st.hasBadge}}" hint-placeholder-val="{{ false }}"><span style="font-size:10.5px;font-weight:700;color:#8A4A15">{{st.b}}</span></sc-if>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px"><sc-if value="{{iconsReady}}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;flex:none;width:46px;height:46px;background-image:url('{{st.iconSrc}}');background-size:contain;background-repeat:no-repeat;background-position:center"></span></sc-if><span style="font-size:15px;font-weight:900">{{st.t}}</span></div>
+        <div style="font-size:11px;color:#5C4C3B;line-height:1.55">{{st.d}}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="margin-top:8mm;border-top:1.5px dashed #B3A48C;padding-top:4mm;break-inside:avoid">
+    <div style="font-size:11px;font-weight:700;color:#B3A48C;margin-bottom:4px">▼ 정답표 — 이 선을 따라 접어서 가려두세요</div>
+    <div style="font-size:12px;line-height:1.7;color:#5C4C3B;border:1px solid #E8DCC9;border-radius:8px;padding:8px 12px;background:#F8F3EA">{{answerLine}}</div>
+  </div>
+
+  <div style="break-before:page"></div>
+
+  <div style="font-size:15px;font-weight:900;margin:0 0 4px;color:#8A4A15">4. 작업대 보드</div>
+  <p style="margin:0 0 10px;font-size:11.5px;color:#6B5A48">칸 크기 = 카드 크기. 재료 카드는 계량대에, 공정 카드는 순서대로 올려놓으세요.</p>
+
+  <div style="break-inside:avoid">
+    <div style="font-size:13px;font-weight:900;margin-bottom:6px">계량대 <span style="font-weight:500;color:#8A7360;font-size:11px">— 재료 카드 진열</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6mm">
+      <sc-for list="{{ingSlots}}" as="sl" hint-placeholder-count="9">
+        <div style="border:1.2px dashed #C9BBA3;border-radius:10px;height:32mm;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:10.5px;color:#B3A48C">재료 {{sl.num}}</div>
+      </sc-for>
+    </div>
+    <div style="margin-top:4mm;font-size:10.5px;color:#8A4A15;font-weight:700;background:#F3E1CD;border-radius:8px;padding:6px 10px;display:inline-block">저울은 0점 확인! 계량대는 항상 깨끗하게</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:5mm;break-inside:avoid">
+    <div style="border:2px solid #A0511E;border-radius:12px;padding:12px;background:#FDF6EE">
+      <div style="font-size:13px;font-weight:900;color:#8A4A15;margin-bottom:4px">오븐 / 굽기</div>
+      <div style="font-size:11.5px;line-height:1.7;color:#5C4C3B">{{bakeInfo}}</div>
+    </div>
+    <div style="border:2px solid #6E6118;border-radius:12px;padding:12px;background:#FBF9EC">
+      <div style="font-size:13px;font-weight:900;color:#6A5D12;margin-bottom:4px">체크 포인트</div>
+      <div style="font-size:11.5px;line-height:1.7;color:#5C4C3B">{{checkInfo}}</div>
+    </div>
+  </div>
+
+  <div style="break-before:page"></div>
+  <div style="font-size:15px;font-weight:900;margin:0 0 4px;color:#8A4A15">5. 공정 순서 보드</div>
+  <p style="margin:0 0 10px;font-size:11.5px;color:#6B5A48">칸 크기 = 공정 카드 크기. 섞은 공정 카드를 1번부터 순서대로 올려놓으세요.</p>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:5mm;break-inside:avoid">
+    <sc-for list="{{stepSlots}}" as="sl" hint-placeholder-count="8">
+      <div style="border:1.2px dashed #C9BBA3;border-radius:10px;height:37mm;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2mm">
+        <span style="width:22px;height:22px;border-radius:50%;background:#3B2E22;color:#F7F1E7;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800">{{sl.num}}</span>
+        <span style="font-size:10px;color:#B3A48C">{{sl.hint}}</span>
+      </div>
+    </sc-for>
+  </div>
+  </sc-if>
+
+  <!-- ============ B안 ============ -->
+  <sc-if value="{{isB}}" hint-placeholder-val="{{ false }}">
+  <div style="background:#F8F3EA;border:1px solid #E8DCC9;border-radius:10px;padding:10px 14px;margin:10px 0 12px;font-size:12px;line-height:1.7;color:#5C4C3B">
+    <strong>놀이 방법</strong> — A안에서 오린 카드로 실제 시험 공정을 시뮬레이션합니다.<br>
+    ① 재료·도구 카드를 전부 옆에 펼쳐 놓는다 → ② 1번 스테이션부터 <strong>그 단계에서 쓰는 재료·도구 카드</strong>를 골라 트레이에 올린다 → ③ 단계가 끝나면 도구 카드를 다음 스테이션으로 <strong>옮겨가며</strong> 진행 → ④ 아래 정답표(접어서 가리기)로 확인.
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:5mm">
+    <sc-for list="{{stations}}" as="s" hint-placeholder-count="8">
+      <div style="border:2px solid #3B2E22;border-radius:12px;padding:10px 12px;background:#FFFDF9;break-inside:avoid">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:2.5mm">
+          <span style="width:26px;height:26px;border-radius:50%;background:#A0511E;color:#FFF6EC;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex:none">{{s.num}}</span>
+          <sc-if value="{{iconsReady}}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;flex:none;width:38px;height:38px;background-image:url('{{s.iconSrc}}');background-size:contain;background-repeat:no-repeat;background-position:center"></span></sc-if>
+          <span style="font-size:16px;font-weight:900">{{s.name}}</span>
+          <sc-if value="{{s.hasBadge}}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:700;color:#8A4A15;background:#F3E1CD;border-radius:99px;padding:3px 10px">{{s.badge}}</span></sc-if>
+          <span style="margin-left:auto;font-size:11px;color:#8A7360">{{s.ask}}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4mm">
+          <sc-if value="{{s.hasIng}}" hint-placeholder-val="{{ true }}">
+            <div style="border:1.5px dashed #C89B6B;border-radius:10px;height:34mm;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1mm;background:#FDF8F1">
+              <span style="font-size:11px;font-weight:800;color:#8A4A15">재료 트레이</span>
+              <span style="font-size:10.5px;color:#B3A48C">여기에 재료 카드 {{s.ingCount}}</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{s.noIng}}" hint-placeholder-val="{{ false }}">
+            <div style="border:1.5px dashed #E3DACB;border-radius:10px;height:34mm;box-sizing:border-box;display:flex;align-items:center;justify-content:center;background:#FAF6EF">
+              <span style="font-size:10.5px;color:#C9BBA3">이 단계는 재료 없음</span>
+            </div>
+          </sc-if>
+          <div style="border:1.5px dashed #A9A05C;border-radius:10px;height:34mm;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1mm;background:#FBF9EC">
+            <span style="font-size:11px;font-weight:800;color:#6A5D12">도구 트레이</span>
+            <span style="font-size:10.5px;color:#B3A48C">여기에 도구 카드 {{s.toolCount}}</span>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="margin-top:8mm;border-top:1.5px dashed #B3A48C;padding-top:4mm;break-inside:avoid">
+    <div style="font-size:11px;font-weight:700;color:#B3A48C;margin-bottom:4px">▼ 정답표 — 이 선을 따라 접어서 가려두세요</div>
+    <div style="border:1px solid #E8DCC9;border-radius:8px;background:#F8F3EA;padding:8px 12px">
+      <sc-for list="{{answers}}" as="an" hint-placeholder-count="8">
+        <div style="display:flex;gap:8px;font-size:11.5px;line-height:1.8;color:#5C4C3B">
+          <span style="font-weight:800;min-width:14px;color:#A0511E">{{an.num}}</span>
+          <span><strong>{{an.name}}</strong> — 재료: {{an.ing}} / 도구: {{an.tool}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { item: null, kit: null, mode: 'A', id: null };
+
+  componentDidMount() {
+    let id = this.props.item;
+    try {
+      const q = new URLSearchParams(window.location.search);
+      if (q.get('item')) id = q.get('item');
+      if (q.get('mode') && q.get('mode').toUpperCase() === 'B') this.setState({ mode: 'B' });
+    } catch (e) {}
+    id = id || 'pound-cake';
+    this.setState({ id });
+    Promise.all([
+      fetch('./items-data.json').then(r => r.json()),
+      fetch('./kit-data.json').then(r => r.json())
+    ]).then(([d, k]) => {
+      this.setState({ item: d.items.find(x => x.id === id) || null, kit: k[id] || null });
+    });
+  }
+
+  svg(body) {
+    return 'data:image/svg+xml,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#6B4423" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' + body + '</svg>'
+    );
+  }
+
+  lib() {
+    const S = b => this.svg(b);
+    const eyes = (x1, x2, y, ys) => '<circle cx="' + x1 + '" cy="' + y + '" r="1.7" fill="#6B4423" stroke="none"/><circle cx="' + x2 + '" cy="' + y + '" r="1.7" fill="#6B4423" stroke="none"/><path d="M' + ((x1 + x2) / 2 - 3) + ' ' + ys + 'c2 1.8 4 1.8 6 0" fill="none"/>';
+    const blush = (x1, x2, y) => '<ellipse cx="' + x1 + '" cy="' + y + '" rx="2.6" ry="1.5" fill="#F4B8C1" stroke="none"/><ellipse cx="' + x2 + '" cy="' + y + '" rx="2.6" ry="1.5" fill="#F4B8C1" stroke="none"/>';
+    return {
+      flour: S('<path d="M20 20h24l5 27a4 4 0 0 1-4 4H19a4 4 0 0 1-4-4z" fill="#F5E7CE"/><path d="M24 20c0-5 3-8 8-8s8 3 8 8" fill="#EAD7B4"/><path d="M22 12l3 6M42 12l-3 6"/>' + eyes(27, 37, 34, 39) + blush(22, 42, 38)),
+      riceflour: S('<path d="M20 20h24l5 27a4 4 0 0 1-4 4H19a4 4 0 0 1-4-4z" fill="#EDE4F0"/><path d="M24 20c0-5 3-8 8-8s8 3 8 8" fill="#DDD0E4"/><circle cx="24" cy="40" r="1.3" fill="#9B7BB0" stroke="none"/><circle cx="32" cy="44" r="1.3" fill="#9B7BB0" stroke="none"/><circle cx="40" cy="40" r="1.3" fill="#9B7BB0" stroke="none"/>' + eyes(27, 37, 34, 39)),
+      sugar: S('<path d="M14 36h36c0 9-8 15-18 15s-18-6-18-15z" fill="#F4B8C1"/><path d="M18 36c1-7 27-7 28 0z" fill="#FFFFFF"/><path d="M24 16l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z" fill="#FFF"/><path d="M41 12l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z" fill="#FFF"/><path d="M18 44c4 2.5 24 2.5 28 0" fill="none" stroke="#E48CA0" stroke-width="1.6"/>'),
+      powdersugar: S('<path d="M14 38h36c0 8-8 13-18 13s-18-5-18-13z" fill="#EAF2FB"/><path d="M18 38c1-6 27-6 28 0z" fill="#FFF"/><circle cx="24" cy="20" r="1.1" fill="#BBD7F0" stroke="none"/><circle cx="32" cy="16" r="1.1" fill="#BBD7F0" stroke="none"/><circle cx="40" cy="21" r="1.1" fill="#BBD7F0" stroke="none"/><circle cx="28" cy="24" r="1.1" fill="#BBD7F0" stroke="none"/><circle cx="37" cy="25" r="1.1" fill="#BBD7F0" stroke="none"/>'),
+      butter: S('<rect x="14" y="26" width="36" height="18" rx="3" fill="#F7D473"/><rect x="21" y="17" width="16" height="11" rx="2" fill="#FBE7A9"/><path d="M10 48h44" stroke-width="2.6"/>' + eyes(26, 38, 34, 38) + blush(21, 43, 38)),
+      margarine: S('<rect x="14" y="26" width="36" height="18" rx="3" fill="#F2E27A"/><rect x="21" y="17" width="16" height="11" rx="2" fill="#DFF0E4"/><path d="M10 48h44" stroke-width="2.6"/>' + eyes(26, 38, 34, 38)),
+      shortening: S('<path d="M16 26h32v20a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4z" fill="#FBFBF7"/><ellipse cx="32" cy="26" rx="16" ry="5" fill="#F0F0E8"/><path d="M24 22c0-4 16-4 16 0"/>'),
+      egg: S('<path d="M32 11c9 9.5 13 16.5 13 23.5a13 13 0 1 1-26 0c0-7 4-14 13-23.5z" fill="#FFF9EE"/>' + eyes(27, 37, 36, 41) + blush(23, 41, 40)),
+      white: S('<path d="M14 40c0-8 8-12 18-12s18 4 18 12c0 6-8 9-18 9s-18-3-18-9z" fill="#FCFCF7"/><ellipse cx="32" cy="36" rx="5" ry="4" fill="#F7D473"/>'),
+      yolk: S('<circle cx="32" cy="34" r="16" fill="#F7C948"/><circle cx="32" cy="34" r="9" fill="#F2A93B"/>' + eyes(28, 36, 33, 37)),
+      salt: S('<path d="M24 22h16l3 24a4 4 0 0 1-4 4H25a4 4 0 0 1-4-4z" fill="#DFF0E4"/><path d="M26 22c0-7 12-7 12 0" fill="#C4E3CD"/><circle cx="30" cy="15" r="1.1" fill="#6B4423" stroke="none"/><circle cx="34" cy="15" r="1.1" fill="#6B4423" stroke="none"/>' + eyes(28, 36, 34, 39)),
+      water: S('<path d="M32 12c8 11 12 17 12 23a12 12 0 1 1-24 0c0-6 4-12 12-23z" fill="#BBDDF0"/>' + eyes(28, 36, 34, 39)),
+      milk: S('<path d="M22 26l5-11h10l5 11v24H22z" fill="#EAF2FB"/><path d="M22 26h20M27 15v35"/><rect x="26" y="32" width="12" height="9" rx="1" fill="#FFF"/><path d="M28 36h8" stroke-width="1.4"/>'),
+      milkpowder: S('<path d="M18 24l4-8h20l4 8v26H18z" fill="#EAF2FB"/><path d="M18 24h28"/><path d="M40 30c2.5 3.5 3.5 4.5 3.5 7a3.5 3.5 0 1 1-7 0c0-2.5 1-3.5 3.5-7z" fill="#BBD7F0"/>'),
+      bpowder: S('<ellipse cx="32" cy="18" rx="13" ry="5" fill="#F0A48A"/><path d="M19 18v26c0 3.5 6 6 13 6s13-2.5 13-6V18" fill="#F6C0AC"/><path d="M32 28l2 4.2 4.6.6-3.4 3.2.9 4.6-4.1-2.2-4.1 2.2.9-4.6-3.4-3.2 4.6-.6z" fill="#FFF" stroke-width="1.6"/>'),
+      bsoda: S('<path d="M18 22l4-6h20l4 6v28H18z" fill="#DCE9F2"/><path d="M18 22h28"/><path d="M26 32h12M26 38h12" stroke-width="1.6"/>'),
+      vanilla: S('<rect x="24" y="24" width="16" height="27" rx="6" fill="#C89B6B"/><rect x="28" y="13" width="8" height="11" rx="2" fill="#8A5A2B"/><circle cx="32" cy="38" r="6" fill="#FFF6EC"/><circle cx="32" cy="38" r="1.7" fill="#F2C94C" stroke="none"/>'),
+      chip: S('<path d="M14 34h36c0 9-8 15-18 15s-18-6-18-15z" fill="#F5E7CE"/><path d="M18 34c1-6 27-6 28 0z" fill="#FBEFDA"/><path d="M24 40l2-3 2 3-2 3z" fill="#5A3A22" stroke="none"/><path d="M32 44l2-3 2 3-2 3z" fill="#5A3A22" stroke="none"/><path d="M39 39l2-3 2 3-2 3z" fill="#5A3A22" stroke="none"/>'),
+      almond: S('<path d="M32 12c8 6 12 14 12 22 0 10-6 16-12 16s-12-6-12-16c0-8 4-16 12-22z" fill="#E9C79A"/><path d="M32 18v28" stroke="#C89B6B"/>' + eyes(28, 36, 32, 36)),
+      chocolate: S('<rect x="16" y="16" width="32" height="32" rx="3" fill="#7A4A28"/><path d="M24 16v32M32 16v32M40 16v32M16 24h32M16 32h32M16 40h32" stroke="#5A3418" stroke-width="1.6"/>'),
+      cocoa: S('<path d="M18 24l3-8h22l3 8v26H18z" fill="#8A5A38"/><path d="M18 24h28"/><circle cx="27" cy="34" r="1.3" fill="#5A3418" stroke="none"/><circle cx="34" cy="38" r="1.3" fill="#5A3418" stroke="none"/><circle cx="38" cy="32" r="1.3" fill="#5A3418" stroke="none"/>'),
+      walnut: S('<circle cx="32" cy="32" r="18" fill="#D9A566"/><path d="M32 14v36M20 22c8 6 8 14 0 20M44 22c-8 6-8 14 0 20" stroke="#B07A3E"/>'),
+      raisin: S('<path d="M14 34h36c0 9-8 15-18 15s-18-6-18-15z" fill="#F5E7CE"/><ellipse cx="25" cy="40" rx="3.5" ry="3" fill="#5A3A55" stroke="none"/><ellipse cx="33" cy="43" rx="3.5" ry="3" fill="#5A3A55" stroke="none"/><ellipse cx="40" cy="39" rx="3.5" ry="3" fill="#5A3A55" stroke="none"/>'),
+      cherry: S('<path d="M40 16c-6 4-14 12-16 20" stroke="#5B8A3A"/><path d="M40 16c-2 5-6 6-10 6" stroke="#5B8A3A"/><circle cx="22" cy="40" r="8" fill="#D9435A"/><circle cx="36" cy="42" r="8" fill="#C4324A"/>'),
+      orange: S('<circle cx="32" cy="34" r="17" fill="#F2A83B"/><path d="M32 34l0-14M32 34l12 6M32 34l-11 7" stroke="#D98A28" stroke-width="1.6"/><path d="M28 19c3-3 5-3 8 0" stroke="#5B8A3A"/>'),
+      wine: S('<rect x="27" y="10" width="10" height="14" rx="1" fill="#7A2A3A"/><path d="M25 24h14v22a4 4 0 0 1-4 4h-6a4 4 0 0 1-4-4z" fill="#9B3A4A"/><rect x="28" y="30" width="8" height="12" rx="1" fill="#F5E7CE"/>'),
+      lemon: S('<ellipse cx="32" cy="34" rx="18" ry="13" fill="#F2D94C"/><path d="M50 34c3 0 3 0 4-1M14 34c-3 0-3 0-4-1"/>' + eyes(28, 36, 33, 37) + blush(24, 40, 37)),
+      cream: S('<path d="M22 50h20v-6c6-2 6-14-2-14-1-8-15-8-16 0-8 0-8 12-2 14z" fill="#FFF9EE"/><path d="M32 24c1-4 4-6 6-4" stroke="#F4B8C1"/>'),
+      syrup: S('<rect x="22" y="22" width="20" height="28" rx="4" fill="#E8B04B"/><rect x="26" y="14" width="12" height="8" rx="2" fill="#C98A2E"/><path d="M32 30v14" stroke="#C98A2E" stroke-width="3"/>'),
+      oil: S('<rect x="24" y="22" width="16" height="28" rx="4" fill="#EEF3D8"/><rect x="28" y="13" width="8" height="9" rx="2" fill="#D3E08A"/><path d="M32 30c2 3 3 4 3 6a3 3 0 1 1-6 0c0-2 1-3 3-6z" fill="#C6D468"/>'),
+      custard: S('<path d="M22 50h20v-6c6-2 6-14-2-14-1-8-15-8-16 0-8 0-8 12-2 14z" fill="#F7E39C"/>' + eyes(28, 36, 40, 44)),
+      buttercream: S('<path d="M22 50h20v-6c6-2 6-14-2-14-1-8-15-8-16 0-8 0-8 12-2 14z" fill="#FBE7C4"/>'),
+      colorant: S('<rect x="26" y="26" width="12" height="24" rx="3" fill="#8A5A38"/><rect x="28" y="14" width="8" height="12" rx="2" fill="#B07A3E"/><ellipse cx="32" cy="12" rx="3" ry="2" fill="#A0511E" stroke="none"/><path d="M32 8v4"/>'),
+      jam: S('<path d="M22 24h20v24a3 3 0 0 1-3 3H25a3 3 0 0 1-3-3z" fill="#E8834B"/><rect x="20" y="18" width="24" height="7" rx="2" fill="#F2A83B"/><rect x="27" y="30" width="10" height="12" rx="1" fill="#FBEFDA"/>'),
+      creamcheese: S('<rect x="16" y="24" width="32" height="24" rx="3" fill="#FBFBF2"/><path d="M16 24l4-8h24l4 8" fill="#FFF9E8"/><path d="M20 16l24 0"/>' + eyes(27, 37, 36, 40) + blush(22, 42, 39)),
+      yeast: S('<path d="M20 22h24l-2 26a3 3 0 0 1-3 3H25a3 3 0 0 1-3-3z" fill="#C9A15E"/><rect x="18" y="16" width="28" height="7" rx="2" fill="#A6813F"/><circle cx="27" cy="34" r="1.4" fill="#8A5A2B" stroke="none"/><circle cx="34" cy="38" r="1.4" fill="#8A5A2B" stroke="none"/><circle cx="38" cy="32" r="1.4" fill="#8A5A2B" stroke="none"/>' + eyes(28, 36, 44, 48)),
+      improver: S('<path d="M18 24l3-8h22l3 8v26H18z" fill="#DFF0E4"/><path d="M18 24h28"/><path d="M32 30v12M26 36h12" stroke="#7BB08A" stroke-width="1.8"/>'),
+      anko: S('<path d="M14 36h36c0 9-8 15-18 15s-18-6-18-15z" fill="#F5E7CE"/><path d="M18 36c1-6 27-6 28 0z" fill="#8A4A55"/><ellipse cx="26" cy="34" rx="2.4" ry="2" fill="#6B3540" stroke="none"/><ellipse cx="34" cy="35" rx="2.4" ry="2" fill="#6B3540" stroke="none"/><ellipse cx="40" cy="33" rx="2.4" ry="2" fill="#6B3540" stroke="none"/>'),
+      cinnamon: S('<rect x="22" y="14" width="8" height="36" rx="4" fill="#B0703A"/><rect x="32" y="14" width="8" height="36" rx="4" fill="#9B5F2E"/><path d="M26 14v36M36 14v36" stroke="#83501F" stroke-width="1.2"/>'),
+      corn: S('<path d="M32 12c8 4 12 12 12 22 0 10-5 16-12 16s-12-6-12-16c0-10 4-18 12-22z" fill="#F7D048"/><path d="M26 22c8 4 8 4 0 8m12-8c-8 4-8 4 0 8m-12 4c8 4 8 4 0 8m12-8c-8 4-8 4 0 8" stroke="#D9A828" stroke-width="1.4"/><path d="M32 12c-4-4-10-2-10-2 0 4 4 6 8 6" fill="#7BA84A"/>'),
+      rye: S('<path d="M32 10v40" stroke="#9B7B4A" stroke-width="2.4"/><path d="M32 18l7-4M32 18l-7-4M32 26l7-4M32 26l-7-4M32 34l7-4M32 34l-7-4" stroke="#B0904A"/>'),
+      wholewheat: S('<path d="M32 10v40" stroke="#8A6A3A" stroke-width="2.4"/><path d="M32 16l6-4M32 16l-6-4M32 24l6-4M32 24l-6-4M32 32l6-4M32 32l-6-4M32 40l6-4M32 40l-6-4" stroke="#A6813F"/>'),
+      oatmeal: S('<path d="M14 34h36c0 9-8 15-18 15s-18-6-18-15z" fill="#F5E7CE"/><path d="M18 34c1-6 27-6 28 0z" fill="#EAD7B4"/><ellipse cx="25" cy="40" rx="3" ry="2" fill="#C9A15E" stroke="none"/><ellipse cx="33" cy="42" rx="3" ry="2" fill="#C9A15E" stroke="none"/><ellipse cx="40" cy="39" rx="3" ry="2" fill="#C9A15E" stroke="none"/>'),
+      chestnut: S('<path d="M18 44c0-10 6-18 14-18s14 8 14 18z" fill="#9B5F2E"/><path d="M18 44h28" stroke="#7A4A22"/><path d="M32 26v-6" stroke="#7A4A22"/>' + eyes(28, 36, 38, 42)),
+      sausage: S('<rect x="12" y="26" width="40" height="12" rx="6" fill="#D9704A"/><path d="M16 30c4 2 32 2 36 0" stroke="#C25836" stroke-width="1.4"/>' + eyes(26, 38, 31, 34)),
+      soboro: S('<path d="M14 34h36c0 9-8 15-18 15s-18-6-18-15z" fill="#E8B04B"/><path d="M18 34c1-6 27-6 28 0z" fill="#F2C86A"/><circle cx="24" cy="40" r="1.4" fill="#C98A2E" stroke="none"/><circle cx="30" cy="43" r="1.4" fill="#C98A2E" stroke="none"/><circle cx="36" cy="40" r="1.4" fill="#C98A2E" stroke="none"/><circle cx="41" cy="43" r="1.4" fill="#C98A2E" stroke="none"/>'),
+      coffee: S('<path d="M18 22h24l-2 22a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4z" fill="#8A5A38"/><path d="M42 26c6 0 6 10 0 10" stroke="#6B4423"/><path d="M26 16c-1-3 1-4 0-6M34 16c-1-3 1-4 0-6" stroke="#C4A582"/>'),
+      generic: S('<rect x="20" y="20" width="24" height="30" rx="4" fill="#F1EADF"/><rect x="24" y="13" width="16" height="8" rx="2" fill="#E0D4C0"/>' + eyes(28, 36, 34, 38))
+    };
+  }
+
+  toolLib() {
+    const S = b => this.svg(b);
+    const pan = (fill) => S('<ellipse cx="32" cy="30" rx="20" ry="7" fill="' + fill + '"/><path d="M12 30v6c0 4 9 7 20 7s20-3 20-7v-6" fill="' + fill + '"/><ellipse cx="32" cy="30" rx="20" ry="7" fill="#FFF" opacity="0.25"/>');
+    return {
+      '저울': S('<rect x="14" y="30" width="36" height="20" rx="4" fill="#EAF2FB"/><ellipse cx="32" cy="24" rx="16" ry="6" fill="#DCE9F2"/><rect x="24" y="36" width="16" height="8" rx="2" fill="#FFF"/><path d="M28 40h8" stroke-width="1.4"/>'),
+      '스테인리스 볼': S('<path d="M12 26h40c0 13-9 22-20 22s-20-9-20-22z" fill="#E8ECEF"/><ellipse cx="32" cy="26" rx="20" ry="5" fill="#DCE2E6"/>'),
+      '거품기(비터)': S('<rect x="29" y="8" width="6" height="16" rx="3" fill="#C89B6B"/><path d="M32 24c-9 3-12 12-8 20 5-3 8-10 8-20z" fill="#E8ECEF"/><path d="M32 24c9 3 12 12 8 20-5-3-8-10-8-20z" fill="#E8ECEF"/><path d="M32 24v27"/>'),
+      '고무주걱': S('<rect x="24" y="10" width="16" height="22" rx="8" fill="#E37E6C"/><rect x="30" y="32" width="4" height="22" rx="2" fill="#C89B6B"/>'),
+      '체(가루체)': S('<circle cx="30" cy="24" r="14" fill="#E8ECEF"/><path d="M20 19h20M18 24h24M20 29h20M25 13v22M35 13v22" stroke-width="1.4"/><path d="M41 35l10 10" stroke-width="3"/><circle cx="26" cy="47" r="1.7" fill="#D9C49A" stroke="none"/><circle cx="33" cy="51" r="1.7" fill="#D9C49A" stroke="none"/>'),
+      '비중컵': S('<path d="M20 14h24l-3 34H23z" fill="#DCE9F2"/><path d="M23 24h18M24 34h16"/><path d="M20 14l-7 5 6 4" fill="none"/>'),
+      '온도계': S('<rect x="28" y="10" width="8" height="30" rx="4" fill="#FFF"/><circle cx="32" cy="44" r="8" fill="#F4B8C1"/><path d="M32 44V20" stroke="#D9534F" stroke-width="3"/><circle cx="32" cy="44" r="3.2" fill="#D9534F" stroke="none"/><path d="M40 16h6M40 22h4M40 28h6"/>'),
+      '파운드팬': S('<path d="M14 30h36l-4 18H18z" fill="#C9A15E"/><path d="M14 30l4-6h28l4 6"/><path d="M50 24v6l-4 18"/>'),
+      '원형팬': pan('#C9A15E'),
+      '평철판': S('<rect x="10" y="20" width="44" height="24" rx="3" fill="#D9C49A"/><rect x="14" y="24" width="36" height="16" rx="2" fill="#C9A15E"/>'),
+      '머핀틀': S('<path d="M14 24h36l-3 22H17z" fill="#C9A15E"/><path d="M14 24c0-3 36-3 36 0"/><path d="M26 24l-1 22M38 24l1 22"/>'),
+      '유산지컵': S('<path d="M20 22h24l-4 24H24z" fill="#F5E7CE"/><path d="M22 28h20M24 36h16" stroke="#D9C49A" stroke-width="1.4"/>'),
+      '시퐁팬': S('<path d="M12 26h40c0 12-9 20-20 20s-20-8-20-20z" fill="#C9A15E"/><ellipse cx="32" cy="26" rx="20" ry="5" fill="#D9C49A"/><circle cx="32" cy="34" r="6" fill="#F7F1E7"/>'),
+      '마드레느팬': S('<path d="M14 22h36v20H14z" fill="#C9A15E"/><path d="M20 22c0 8 3 12 3 20M32 22c0 8 3 12 3 20M44 22c0 8-3 12-3 20" stroke="#A6813F" stroke-width="1.4"/>'),
+      '타르트팬': S('<ellipse cx="32" cy="32" rx="20" ry="14" fill="#C9A15E"/><ellipse cx="32" cy="32" rx="13" ry="9" fill="#D9C49A"/><path d="M12 32c2-2 2-2 4 0M52 32c-2-2-2-2-4 0" stroke="#A6813F"/>'),
+      '컵몰드': S('<path d="M22 22h20l-3 26H25z" fill="#C9A15E"/><path d="M22 22c0-2 20-2 20 0"/>'),
+      '다쿠와즈틀': S('<rect x="12" y="22" width="40" height="20" rx="3" fill="#DCE2E6"/><rect x="18" y="26" width="9" height="12" rx="4" fill="#F7F1E7"/><rect x="30" y="26" width="9" height="12" rx="4" fill="#F7F1E7"/><rect x="42" y="26" width="5" height="12" rx="2" fill="#F7F1E7"/>'),
+      '스패출러(칼)': S('<path d="M13 51l9-9" stroke="#C89B6B" stroke-width="6"/><path d="M22 42L38 26l8 8-16 16z" fill="#E8ECEF"/>'),
+      '짤주머니': S('<path d="M20 12h24L34 44h-4z" fill="#EAF2FB"/><path d="M30 44l4 8 4-8z" fill="#D9C49A"/><path d="M20 12c8 4 16 4 24 0" stroke-width="1.4"/>'),
+      '밀대': S('<rect x="10" y="28" width="44" height="10" rx="5" fill="#D9A566"/><rect x="4" y="31" width="8" height="4" rx="2" fill="#C89B6B"/><rect x="52" y="31" width="8" height="4" rx="2" fill="#C89B6B"/>'),
+      '모양틀': S('<path d="M32 12l5.5 11 12 1.5-9 8 2.5 12L32 40l-11 4.5 2.5-12-9-8 12-1.5z" fill="#DCE2E6"/>'),
+      '냄비': S('<path d="M14 28h36v10c0 5-6 9-18 9s-18-4-18-9z" fill="#B8BEC2"/><rect x="8" y="30" width="8" height="4" rx="2" fill="#8A8F92"/><rect x="48" y="30" width="8" height="4" rx="2" fill="#8A8F92"/><ellipse cx="32" cy="28" rx="18" ry="4" fill="#CDD3D6"/>'),
+      '붓': S('<rect x="30" y="10" width="4" height="24" rx="2" fill="#C89B6B"/><path d="M26 34h12l-2 16h-8z" fill="#E8B04B"/><path d="M28 44h8" stroke-width="1.2"/>'),
+      '분무기': S('<rect x="26" y="24" width="14" height="26" rx="3" fill="#DCE9F2"/><path d="M26 28l-10-4v6l10 2" fill="#BBD7F0"/><rect x="30" y="16" width="8" height="8" rx="2" fill="#B9CFDE"/>'),
+      '강판': S('<rect x="22" y="12" width="20" height="36" rx="4" fill="#DCE2E6"/><circle cx="28" cy="22" r="1.4" fill="#8A8F92" stroke="none"/><circle cx="36" cy="22" r="1.4" fill="#8A8F92" stroke="none"/><circle cx="28" cy="30" r="1.4" fill="#8A8F92" stroke="none"/><circle cx="36" cy="30" r="1.4" fill="#8A8F92" stroke="none"/><circle cx="32" cy="38" r="1.4" fill="#8A8F92" stroke="none"/>'),
+      '면포': S('<path d="M14 16h36v32H14z" fill="#F5EFE2"/><path d="M14 24h36M14 32h36M14 40h36M22 16v32M32 16v32M42 16v32" stroke="#DCD2BE" stroke-width="1.2"/>'),
+      '행주·스크레이퍼': S('<rect x="12" y="28" width="20" height="20" rx="3" fill="#DFF0E4"/><path d="M12 34h20M12 40h20" stroke="#B7D9C0" stroke-width="1.2"/><path d="M38 16h12v20a2 2 0 0 1-2 2H40a2 2 0 0 1-2-2z" fill="#E8ECEF"/>'),
+      '핸드믹서': S('<path d="M20 16h20v10a6 6 0 0 1-6 6H26a6 6 0 0 1-6-6z" fill="#E8ECEF"/><rect x="38" y="18" width="10" height="6" rx="3" fill="#DCE2E6"/><path d="M28 32v8M34 32v8" stroke-width="2.6"/>'),
+      '식빵팬': S('<path d="M14 24h36l-3 24H17z" fill="#C9A15E"/><path d="M14 24c0-3 36-3 36 0"/><path d="M17 34h30" stroke="#A6813F" stroke-width="1.2"/>'),
+      '풀먼팬': S('<rect x="14" y="24" width="36" height="22" rx="2" fill="#C9A15E"/><rect x="12" y="18" width="40" height="7" rx="2" fill="#A6813F"/><path d="M14 35h36" stroke="#A6813F" stroke-width="1.2"/>'),
+      '원로프팬': S('<path d="M14 26h36l-3 20H17z" fill="#C9A15E"/><path d="M14 26c0-2 36-2 36 0"/>'),
+      '발효실': S('<rect x="12" y="14" width="40" height="36" rx="4" fill="#DCE9F2"/><rect x="18" y="20" width="28" height="24" rx="2" fill="#EAF2FB"/><path d="M24 30c-1-3 1-4 0-7M32 30c-1-3 1-4 0-7M40 30c-1-3 1-4 0-7" stroke="#B9CFDE"/>'),
+      '튀김냄비': S('<path d="M12 28h40v8c0 5-8 10-20 10s-20-5-20-10z" fill="#B8BEC2"/><ellipse cx="32" cy="28" rx="20" ry="5" fill="#E8B04B"/><rect x="6" y="30" width="8" height="4" rx="2" fill="#8A8F92"/>'),
+      '가위': S('<path d="M40 14L26 34M40 14c2 0 4 2 3 5s-5 3-6 1 1-6 3-6z" fill="#E8ECEF"/><circle cx="22" cy="40" r="5" fill="none" stroke="#8A8F92" stroke-width="2.4"/><circle cx="34" cy="44" r="5" fill="none" stroke="#8A8F92" stroke-width="2.4"/><path d="M18 44L34 24"/>'),
+      '스크레이퍼': S('<path d="M20 14h24v22a2 2 0 0 1-2 2H22a2 2 0 0 1-2-2z" fill="#E8ECEF"/><path d="M24 40h16v6H24z" fill="#C89B6B"/>'),
+      'generic': S('<rect x="18" y="18" width="28" height="28" rx="4" fill="#E8ECEF"/>')
+    };
+  }
+
+  norm(name) {
+    return name.replace(/\s*\([^)]*\)\s*/g, '').trim();
+  }
+
+  ingKey(name) {
+    const n = this.norm(name);
+    const map = {
+      '박력분':'flour','중력분':'flour','강력분':'flour','박력쌀가루':'riceflour','쌀가루':'riceflour',
+      '설탕':'sugar','분당':'powdersugar',
+      '버터':'butter','용해버터':'butter','마가린':'margarine','쇼트닝':'shortening',
+      '달걀':'egg','달걀흰자':'white','흰자':'white','노른자':'yolk',
+      '소금':'salt','물':'water','우유':'milk','탈지분유':'milkpowder',
+      '베이킹파우더':'bpowder','베이킹소다':'bsoda','바닐라향':'vanilla',
+      '초코칩':'chip','아몬드분말':'almond','아몬드슬라이스':'almond',
+      '다크초콜릿':'chocolate','코코아파우더':'cocoa','호두':'walnut',
+      '건포도':'raisin','체리':'cherry','오렌지필':'orange','레몬껍질':'lemon',
+      '럼':'wine','적포도주':'wine','생크림':'cream','물엿':'syrup','식용유':'oil',
+      '커스터드크림':'custard','버터크림':'buttercream','캐러멜색소':'colorant','살구잼':'jam',
+      '크림치즈':'creamcheese','레몬주스':'lemon','럼주':'wine','계핏가루':'cinnamon','계피가루':'cinnamon',
+      '다크커버추어':'chocolate','커버추어':'chocolate',
+      '생이스트':'yeast','이스트':'yeast','제빵개량제':'improver','제빵 개량제':'improver',
+      '통팥앙금':'anko','팥앙금':'anko','앙금':'anko','흰앙금':'anko',
+      '옥수수분말':'corn','옥수숫가루':'corn','옥수수가루':'corn',
+      '호밀가루':'rye','통밀가루':'wholewheat','오트밀':'oatmeal',
+      '밤':'chestnut','밤다이스':'chestnut','당절임밤':'chestnut','소시지':'sausage','프랑크소시지':'sausage',
+      '분유':'milkpowder','커피':'coffee','인스턴트커피':'coffee','생크림':'cream'
+    };
+    return map[n] || 'generic';
+  }
+
+  stepIcon(title) {
+    const S = b => this.svg(b);
+    const t = title || '';
+    if (/계량/.test(t)) return S('<rect x="14" y="30" width="36" height="20" rx="4" fill="#EAF2FB"/><ellipse cx="32" cy="24" rx="16" ry="6" fill="#DCE9F2"/><rect x="24" y="36" width="16" height="8" rx="2" fill="#FFF"/>');
+    if (/머랭|흰자/.test(t)) return S('<path d="M14 40c0-8 8-12 18-12s18 4 18 12c0 6-8 9-18 9s-18-3-18-9z" fill="#FCFCF7"/><path d="M24 28c2-6 6-8 8-4 2-4 8-4 8 2" stroke="#F4B8C1"/>');
+    if (/크림화|버터 풀기|크림/.test(t)) return S('<path d="M12 30h40c0 13-9 22-20 22s-20-9-20-22z" fill="#E8ECEF"/><path d="M40 12v18M36 16l8 0" stroke="#C89B6B"/>');
+    if (/달걀|노른자/.test(t)) return S('<path d="M32 11c9 9.5 13 16.5 13 23.5a13 13 0 1 1-26 0c0-7 4-14 13-23.5z" fill="#FFF9EE"/><circle cx="27" cy="34" r="1.6" fill="#6B4423" stroke="none"/><circle cx="37" cy="34" r="1.6" fill="#6B4423" stroke="none"/>');
+    if (/가루|혼합/.test(t)) return S('<circle cx="30" cy="24" r="13" fill="#E8ECEF"/><path d="M20 20h20M19 24h22M20 28h20" stroke-width="1.4"/><path d="M40 34l10 10" stroke-width="3"/><circle cx="27" cy="45" r="1.6" fill="#D9C49A" stroke="none"/><circle cx="34" cy="49" r="1.6" fill="#D9C49A" stroke="none"/>');
+    if (/온도|비중|측정/.test(t)) return S('<rect x="27" y="10" width="8" height="30" rx="4" fill="#FFF"/><circle cx="31" cy="44" r="8" fill="#F4B8C1"/><path d="M31 44V20" stroke="#D9534F" stroke-width="3"/><circle cx="31" cy="44" r="3" fill="#D9534F" stroke="none"/>');
+    if (/팬닝|짜기|성형|팬에/.test(t)) return S('<path d="M20 12h24L34 44h-4z" fill="#EAF2FB"/><path d="M30 44l4 8 4-8z" fill="#D9C49A"/>');
+    if (/말기/.test(t)) return S('<path d="M14 32a18 18 0 0 1 36 0 18 18 0 0 1-36 0z" fill="#F5E7CE"/><path d="M32 32m-9 0a9 9 0 1 0 18 0 9 9 0 1 0-18 0" fill="#E8B04B"/><path d="M32 32m-3 0a3 3 0 1 0 6 0 3 3 0 1 0-6 0" fill="#C98A2E"/>');
+    if (/휴지/.test(t)) return S('<circle cx="32" cy="32" r="18" fill="#EAF2FB"/><path d="M32 22v10l7 4" stroke="#6B4423"/>');
+    if (/호화|끓|익반죽/.test(t)) return S('<path d="M14 30h36v6c0 5-6 9-18 9s-18-4-18-9z" fill="#B8BEC2"/><ellipse cx="32" cy="30" rx="18" ry="4" fill="#CDD3D6"/><path d="M26 20c-1-3 1-4 0-7M32 20c-1-3 1-4 0-7M38 20c-1-3 1-4 0-7" stroke="#C4C9CC"/>');
+    if (/굽|터뜨리|튀김|냉각/.test(t)) return S('<rect x="12" y="12" width="40" height="40" rx="5" fill="#DFF0E4"/><rect x="18" y="26" width="28" height="18" rx="3" fill="#FFF9EE"/><path d="M18 19h6M30 19h16"/><path d="M24 38c0-5 5-7 8-5 3-2 8 0 8 5z" fill="#E8B04B"/>');
+    if (/충전|샌드|크림 충전/.test(t)) return S('<path d="M22 50h20v-6c6-2 6-14-2-14-1-8-15-8-16 0-8 0-8 12-2 14z" fill="#FFF9EE"/>');
+    if (/광택|퐁당/.test(t)) return S('<rect x="30" y="10" width="4" height="22" rx="2" fill="#C89B6B"/><path d="M26 32h12l-2 16h-8z" fill="#E8B04B"/>');
+    return S('<circle cx="32" cy="32" r="18" fill="#F3E1CD"/><path d="M24 32l6 6 12-12" stroke="#8A4A15" stroke-width="3"/>');
+  }
+
+  renderVals() {
+    const s = this.state, it = s.item, kit = s.kit;
+    const lib = this.lib(), tlib = this.toolLib();
+    const ingIcon = name => lib[this.ingKey(name)] || lib.generic;
+    const toolIcon = name => tlib[this.norm(name)] || tlib.generic;
+
+    const base = {
+      iconsReady: true,
+      isA: s.mode === 'A', isB: s.mode === 'B',
+      showA: () => this.setState({ mode: 'A' }),
+      showB: () => this.setState({ mode: 'B' }),
+      modeBadge: s.mode === 'A' ? 'A안' : 'B안',
+      titlePrefix: s.mode === 'A' ? '베이킹 모형 카드' : '실습 보드',
+      productIcon: lib.flour
+    };
+
+    if (!it) return { ...base, iName: '로딩 중', iExamFull: '', iTime: '', iMethod: '', ingCount: 0, toolCount: 0, stepCount: 0, ingCards: [], toolCards: [], stepCards: [], ingSlots: [], stepSlots: [], answerLine: '', bakeInfo: '', checkInfo: '', stations: [], answers: [] };
+
+    const ings = it.ingredients || [];
+    const steps = it.steps || [];
+    const tools = (kit && kit.tools) || [];
+    const stepHints = ['계량', '반죽', '', '', '', '', '팬닝', '굽기'];
+
+    // 체크포인트 텍스트
+    const checks = [];
+    if (it.temp) checks.push('반죽온도 <strong>' + it.temp + '</strong>');
+    if (it.gravity) checks.push('비중 <strong>' + it.gravity + '</strong>');
+    checks.push('정리정돈·위생도 채점 대상');
+    // 굽기 정보: 마지막 굽기 스텝의 배지
+    const bakeStep = [...steps].reverse().find(st => /굽기|굽|튀김/.test(st.t));
+    const bakeInfo = bakeStep && bakeStep.b ? bakeStep.b : (steps.length ? (steps[steps.length - 1].b || '공정 카드 참고') : '');
+
+    let stations = [], answers = [];
+    if (kit && kit.stations) {
+      stations = kit.stations.map((st, i) => {
+        const stepT = steps[i] ? steps[i].t : ('단계 ' + (i + 1));
+        const stepB = steps[i] ? steps[i].b : '';
+        const ingList = st.ing === 'ALL' ? ings.map(g => g.n) : (st.ing || []);
+        const toolList = st.tools || [];
+        return {
+          num: i + 1, name: stepT,
+          badge: stepB, hasBadge: !!stepB,
+          iconSrc: this.stepIcon(stepT),
+          ask: st.ask || '',
+          hasIng: ingList.length > 0, noIng: ingList.length === 0,
+          ingCount: st.ing === 'ALL' ? '전부' : (ingList.length + '장'),
+          toolCount: toolList.length + '장'
+        };
+      });
+      answers = kit.stations.map((st, i) => {
+        const stepT = steps[i] ? steps[i].t : ('단계 ' + (i + 1));
+        const ingList = st.ing === 'ALL' ? ['전부'] : (st.ing || []);
+        return {
+          num: i + 1, name: stepT,
+          ing: ingList.length ? ingList.join(', ') : '없음',
+          tool: (st.tools || []).join(', ') || '없음'
+        };
+      });
+    }
+
+    return {
+      ...base,
+      iName: it.name,
+      iExamFull: it.exam === '제과' ? '제과기능사' : '제빵기능사',
+      iTime: it.time, iMethod: it.method,
+      productIcon: lib.flour,
+      ingCount: ings.length, toolCount: tools.length, stepCount: steps.length,
+      ingCards: ings.map(g => ({ ...g, iconSrc: ingIcon(g.n) })),
+      toolCards: tools.map(n => ({ n, iconSrc: toolIcon(n) })),
+      stepCards: steps.map(st => ({ ...st, hasBadge: !!st.b, iconSrc: this.stepIcon(st.t) })),
+      ingSlots: ings.map((_, i) => ({ num: i + 1 })),
+      stepSlots: steps.map((_, i) => ({ num: i + 1, hint: stepHints[i] || '' })),
+      answerLine: steps.map((st, i) => (i + 1) + ' ' + st.t).join('  →  '),
+      bakeInfo, checkInfo: checks.join('<br>'),
+      stations, answers
+    };
+  }
+}
+</script>
+<script>
+(async () => {
+  if (!document.title || !document.title.trim()) document.title = "모형 카드";
+  // Prepend so page-supplied @page / break rules (deck-stage's margin:0,
+  // author CSS) keep source-order precedence over the baseline.
+  const baseCss = document.createElement('style');
+  baseCss.textContent = "@media print {\n  figure, table { break-inside: avoid; }\n  *, *::before, *::after {\n    print-color-adjust: exact; -webkit-print-color-adjust: exact;\n    backdrop-filter: none !important; -webkit-backdrop-filter: none !important;\n    animation-delay: -99s !important; animation-duration: .001s !important;\n    animation-iteration-count: 1 !important; animation-fill-mode: both !important;\n    animation-play-state: running !important; transition-duration: 0s !important;\n  }\n}";
+  document.head.prepend(baseCss);
+  if (document.readyState === 'loading') {
+    await new Promise((r) => document.addEventListener('DOMContentLoaded', r, { once: true }));
+  }
+  let ds = document.querySelector('deck-stage');
+  // whenDefined never resolves when nothing registers the element, so only
+  // await it when a <deck-stage> tag exists (and race a timeout regardless).
+  if (ds && !customElements.get('deck-stage')) {
+    try {
+      await Promise.race([
+        customElements.whenDefined('deck-stage'),
+        new Promise((r) => setTimeout(r, 3000)),
+      ]);
+    } catch (e) {}
+    ds = document.querySelector('deck-stage');
+  }
+  // dc-runtime assigns window.DCLogic at init and mounts into #dc-root on
+  // DOMContentLoaded; settle on that subtree so React has rendered before
+  // print(). Non-DC pages fall through to weighing body.
+  const isDc = !ds && 'DCLogic' in window;
+  const settleRoot = ds || (isDc ? document.getElementById('dc-root') : null) || document.body;
+  if (settleRoot) {
+    // Weigh only content children — skip script/style/template so inline
+    // Babel/CSS doesn't register as stable "content" before the framework
+    // has mounted anything.
+    const MEDIA = 'img,svg,canvas,video,picture,iframe,embed,object';
+    const weigh = () => {
+      let text = 0, media = 0;
+      for (const c of settleRoot.children) {
+        const t = c.tagName;
+        if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+        text += (c.textContent || '').trim().length;
+        media += c.querySelectorAll(MEDIA).length + (c.matches(MEDIA) ? 1 : 0);
+      }
+      return text + media * 100;
+    };
+    // "Non-zero and stable" alone is not sufficient to mean rendered: generic
+    // body can carry a static shell while async main content is pending, and
+    // #dc-root can carry the root DC's static text while child refs are still
+    // .sc-placeholder boxes. Gate generic on readyState 'complete', and never
+    // accept stability while a dc-runtime placeholder is present.
+    const isGeneric = settleRoot === document.body;
+    const deadline = Date.now() + 15000;
+    let last = -1, stable = 0;
+    while (Date.now() < deadline) {
+      const n = weigh();
+      const ready =
+        (!isGeneric || document.readyState === 'complete') &&
+        !settleRoot.querySelector('.sc-placeholder');
+      if (n > 0 && n === last && ready) { if (++stable >= 2) break; } else { stable = 0; }
+      last = n;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+  }
+  // Project support.js may predate runtime default-seeding; push via bridge.
+  if (isDc && window.__dcSetProps && window.__dcRootName) {
+    try {
+      const dpEl = document.querySelector('script[data-dc-script]');
+      const meta = JSON.parse((dpEl && dpEl.getAttribute('data-props')) || '{}');
+      const bag = {};
+      for (const k in meta)
+        if (k[0] !== '$' && meta[k] && meta[k].default !== undefined)
+          bag[k] = meta[k].default;
+      if (Object.keys(bag).length) {
+        window.__dcSetProps(window.__dcRootName(), bag);
+        await new Promise((r) => setTimeout(r, 50));
+      }
+    } catch (e) {}
+  }
+  // Reveal content gated on scroll or visibility before printing. Lazy <img>,
+  // IntersectionObserver fade-ins, and collapsed <details> don't render while
+  // off-screen, so a long page would print with them blank or closed. Open
+  // every <details>, force native-lazy images eager, and scroll the document
+  // through its full height to trip lazy-load + IO; then wait (bounded) for the
+  // newly-triggered images. Inert for deck-stage (slides aren't scroll-gated).
+  try {
+    for (const d of document.querySelectorAll('details')) d.open = true;
+    for (const img of document.querySelectorAll('img[loading="lazy"]'))
+      img.loading = 'eager';
+    const scroller = document.scrollingElement || document.documentElement;
+    const full = Math.max(scroller.scrollHeight, document.body.scrollHeight);
+    const step = window.innerHeight || 800;
+    for (let y = 0; y <= full; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => requestAnimationFrame(r));
+    }
+    window.scrollTo(0, 0);
+    await Promise.race([
+      Promise.all(
+        [...document.images].map((img) =>
+          img.complete
+            ? null
+            : new Promise((res) => {
+                img.addEventListener('load', res, { once: true });
+                img.addEventListener('error', res, { once: true });
+              })
+        )
+      ),
+      new Promise((r) => setTimeout(r, 4000)),
+    ]);
+  } catch (e) {}
+  try { await document.fonts.ready; } catch (e) {}
+  // Jump every animation to its end state so print() never captures a slide
+  // mid-entrance. Ordering matters: the 0s-transition style must be live
+  // BEFORE data-deck-active is set so attribute-keyed transitions don't
+  // start a (now-0s) run from the pre-active base.
+  const st = document.createElement('style');
+  st.textContent = '*,*::before,*::after{animation-delay:-99s !important;animation-duration:.001s !important;animation-iteration-count:1 !important;animation-fill-mode:both !important;animation-play-state:running !important;transition-duration:0s !important}';
+  document.head.appendChild(st);
+  for (const d of document.querySelectorAll('deck-stage')) {
+    for (const c of d.children) {
+      const t = c.tagName;
+      if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+      c.setAttribute('data-deck-active', '');
+    }
+  }
+  // Re-append deck-stage's @page last so no author @page can add a margin and
+  // spill each full-bleed slide onto two sheets. Backstop for old copies.
+  if (ds) {
+    let pg = document.getElementById('deck-stage-print-page');
+    if (!pg) {
+      pg = document.createElement('style');
+      pg.textContent = '@page{size:' + (+ds.getAttribute('width') || 1920) +
+        'px ' + (+ds.getAttribute('height') || 1080) + 'px;margin:0}';
+    }
+    document.body.appendChild(pg);
+  }
+  try {
+    const sweep = () => {
+      for (const a of document.getAnimations()) {
+        try { a.finish(); } catch (e) {
+          try { a.currentTime = (a.effect && a.effect.getComputedTiming().duration) || 0; a.pause(); } catch (e2) {}
+        }
+      }
+    };
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+  } catch (e) {}
+  // A document that owns its print CSS (the doc-page starter injects the
+  // meta at runtime; hand-rolled print designs author it) gets no automatic
+  // page geometry and keeps its forced breaks: strip the injected default
+  // @page — write time cannot see a runtime-injected meta — skip the frame
+  // override below, and skip the fakepage-flattening further down. What
+  // still applies: the print baseline and break-hygiene defaults (no @page
+  // in either; low specificity, so the document's own print CSS wins) and
+  // the break-inside relaxation on >page elements (avoid on those cannot
+  // be honored whoever authored it).
+  var ownsPrint = !!document.querySelector('meta[name="omelette-owns-print" i]');
+  if (ownsPrint) {
+    var dst = document.querySelector('style[data-omelette-print-defaults]');
+    if (dst && dst.textContent) {
+      dst.textContent = dst.textContent.replace(/@page\b[^{}]*\{[^}]*\}/, '');
+    }
+  }
+  // Size the PDF page to the rendered design unless the file opted into
+  // standard paper via @page{size:letter|A4|…} or declared print ownership
+  // via the meta above. Decks own their own @page.
+  // Wrappers (body, …) lose padding+margin so the frame sits at (0,0); the
+  // frame itself loses only margin — its padding is INSIDE the measured
+  // rect and must stay, or content shifts and leaves a gap at bottom/right.
+  var __m = null;
+  try { __m = (() => {
+  var STAMP = true;
+  var docEl = document.documentElement;
+  var doc = { width: docEl.scrollWidth, height: docEl.scrollHeight };
+  // Name-presence check, case-insensitive — the same contract as the
+  // instant-PDF path's runtime check in deck-stage-export.ts. The name is
+  // a string literal here because that file interpolates this script into
+  // its print script, so importing a shared constant from it would be a
+  // cycle; measure.test.ts pins the literal so the two cannot drift apart
+  // silently.
+  var ownsPrint = !!document.querySelector('meta[name="omelette-owns-print" i]');
+
+  var ds = document.querySelector('deck-stage');
+  if (ds) {
+    var dw = Number(ds.getAttribute('width')) || 1920;
+    var dh = Number(ds.getAttribute('height')) || 1080;
+    var n = typeof ds.length === 'number' ? ds.length : ds.children.length;
+    var idx = typeof ds.index === 'number' ? ds.index : 0;
+    var frames = [];
+    for (var i = 0; i < n; i++) frames.push({ left: 0, top: 0, width: dw, height: dh });
+    return { kind: 'deck', source: 'declared', doc: doc, frames: frames,
+      authored: frames.map(function(){return{width:true,height:true}}),
+      deck: { width: dw, height: dh, slideCount: n, index: idx },
+      signals: { paperPage: false, pxPage: false, ownsPrint: ownsPrint } };
+  }
+
+  // Declared kind: a doc-page tag names the kind outright, so no signal
+  // heuristics run (like the deck branch above, signals report false —
+  // they describe inferred classifications only). The tag alone is not
+  // trusted: the element must have upgraded (shadowRoot present), so a
+  // leftover tag whose script was deleted falls through to the heuristics
+  // that handle plain markup.
+  var stageSx = window.scrollX || 0, stageSy = window.scrollY || 0;
+  var dp = document.querySelector('doc-page');
+  if (dp && dp.shadowRoot) {
+    // Crop to the sheet, not the host — the desk around it is screen-only
+    // chrome that must not land in PNG exports.
+    var sheet = dp.shadowRoot.querySelector('.sheet');
+    var sr = (sheet || dp).getBoundingClientRect();
+    return { kind: 'paper-doc', source: 'declared', doc: doc,
+      frames: [{ left: sr.left + stageSx, top: sr.top + stageSy,
+        width: sr.width, height: sr.height }],
+      authored: [{ width: false, height: false }],
+      signals: { paperPage: false, pxPage: false, ownsPrint: ownsPrint } };
+  }
+  var paperPage = false, pxPage = false;
+  var eachRule = function (fn) {
+    for (var s = 0; s < document.styleSheets.length; s++) {
+      var rs; try { rs = document.styleSheets[s].cssRules; } catch (e) { continue; }
+      for (var r = 0; r < rs.length; r++) {
+        fn(rs[r]);
+        if (rs[r].cssRules) for (var n = 0; n < rs[r].cssRules.length; n++) fn(rs[r].cssRules[n]);
+      }
+    }
+  };
+  eachRule(function (r) {
+    if (r.type !== 6) return;
+    var m = /\bsize\s*:\s*([^;}]+)/i.exec(r.cssText || '');
+    if (!m) return;
+    if (/\b(letter|a[3-5]|legal|ledger)\b/i.test(m[1])) paperPage = true;
+    if (/\d+(?:\.\d+)?px\b/i.test(m[1])) pxPage = true;
+  });
+  var signals = { paperPage: paperPage, pxPage: pxPage, ownsPrint: ownsPrint };
+
+  var pxVal = function (v) {
+    var m = /^(\d+(?:\.\d+)?)px$/.exec(v || ''); return m ? +m[1] : 0;
+  };
+  var authoredPx = function (el, prop) {
+    if (pxVal(el.style[prop])) return true;
+    var attr = el.getAttribute(prop);
+    if (attr && /^\d+$/.test(attr)) return true;
+    var hit = false;
+    eachRule(function (r) {
+      if (hit || r.type !== 1 || !r.style) return;
+      try { if (el.matches(r.selectorText) && pxVal(r.style[prop])) hit = true; } catch (e) {}
+    });
+    return hit;
+  };
+
+  var el = document.body, rootPxW = false;
+  for (;;) {
+    var kids = [];
+    for (var c = 0; c < el.children.length; c++) {
+      var t = el.children[c].tagName;
+      if (t !== 'SCRIPT' && t !== 'STYLE' && t !== 'TEMPLATE') kids.push(el.children[c]);
+    }
+    if (kids.length !== 1 || !(kids[0] instanceof HTMLElement)) break;
+    if (STAMP) el.setAttribute('data-om-frame-wrap', '');
+    el = kids[0];
+    rootPxW = authoredPx(el, 'width');
+    if (rootPxW) break;
+  }
+  if (!rootPxW) rootPxW = authoredPx(el, 'width');
+
+  // @page{size:letter} alone is a flowing doc; with a px-width root it's a
+  // fixed sheet pretending to be paper — fall through and size to render.
+  if (paperPage && !rootPxW) {
+    return { kind: 'paper-doc', source: 'inferred', doc: doc, signals: signals,
+      frames: [{ left: 0, top: 0, width: doc.width, height: doc.height }],
+      authored: [{ width: false, height: false }] };
+  }
+
+  var sx = window.scrollX || 0, sy = window.scrollY || 0;
+  var rectOf = function (e) {
+    var r = e.getBoundingClientRect();
+    var oy; try { oy = getComputedStyle(e).overflowY; } catch (err) {}
+    var h = oy === 'visible' ? Math.max(r.height, e.scrollHeight || 0) : r.height;
+    return { left: r.left + sx, top: r.top + sy, width: r.width, height: h };
+  };
+
+  // Multi-frame: off unless the page opts in via data-om-multi-frame on the
+  // stop element — the explicit opt-in is what guards against card grids
+  // and pricing tables that match the geometry but aren't separate
+  // canvases. Two ways to name the frames, explicit first:
+  // 1. Descendants marked data-om-frame-export (the social-frames starter
+  //    marks each asset frame; shells/panels around them are presentation,
+  //    so nesting is expected). Document order.
+  // 2. Fallback, no marked descendants: direct children with an authored px
+  //    width AND height (the original geometry heuristic).
+  // Frames may be different sizes (a gallery mixes 1080×1920 stories with
+  // 728×90 banners); data-om-frame-label rides along for export filenames.
+  if (el.hasAttribute('data-om-multi-frame')) {
+    var visOk = function (e) {
+      var cs; try { cs = getComputedStyle(e); } catch (err) { return false; }
+      return cs.display !== 'none' && cs.visibility !== 'hidden' && cs.position !== 'fixed';
+    };
+    // A frame's crop is its VISUAL box — never the scrollHeight-inflated
+    // rect that rectOf computes for page roots. Shadow-DOM hover controls
+    // (image-slot's Replace bar parks 29px below its host) and similar
+    // escaping UI contribute scrollable overflow to the frame, and the
+    // inflated height both squashes the nominal-size resize and drags
+    // content below the frame into the crop. Zoom-independent; bit every
+    // slot-bearing frame.
+    var frameRectOf = function (e) {
+      var r = e.getBoundingClientRect();
+      return { left: r.left + sx, top: r.top + sy, width: r.width, height: r.height };
+    };
+    var pushCand = function (list, e) {
+      if (!visOk(e)) return;
+      var rc = frameRectOf(e);
+      if (rc.width < 2 || rc.height < 2) return;
+      var lbl = e.getAttribute('data-om-frame-label');
+      if (lbl) rc.label = lbl;
+      list.push(rc);
+    };
+    var cands = [];
+    var marked = el.querySelectorAll('[data-om-frame-export]');
+    if (marked.length) {
+      for (var mk = 0; mk < marked.length; mk++) pushCand(cands, marked[mk]);
+    } else {
+      for (var k = 0; k < el.children.length; k++) {
+        var ch = el.children[k];
+        if (!authoredPx(ch, 'width') || !authoredPx(ch, 'height')) continue;
+        pushCand(cands, ch);
+      }
+    }
+    if (cands.length >= 2) {
+      return { kind: 'multi-frame', source: 'inferred', doc: doc, signals: signals,
+        frames: cands, authored: cands.map(function(){return{width:true,height:true}}) };
+    }
+  }
+
+  if (STAMP) el.setAttribute('data-om-frame', '');
+  return { kind: 'single-canvas', source: 'inferred', doc: doc, signals: signals,
+    frames: [rectOf(el)],
+    authored: [{ width: rootPxW, height: authoredPx(el, 'height') }] };
+})(); } catch (e) {}
+  var frame = null;
+  if (!ownsPrint && __m && __m.kind === 'single-canvas') {
+    var f = __m.frames && __m.frames[0];
+    if (f && f.width >= 200 && f.height >= 200) {
+      frame = f;
+      var fst = document.createElement('style');
+      fst.textContent = '@media print{@page{size:' + Math.ceil(f.width) + 'px ' +
+        Math.ceil(f.height) + 'px;margin:0}' +
+        'html,body,[data-om-frame-wrap]{padding:0!important;margin:0!important;background:none!important}' +
+        '[data-om-frame]{margin:0!important}}';
+      document.body.appendChild(fst);
+    }
+  }
+  // Relax break-inside on oversized elements. An element taller than a
+  // printable page can't honor break-inside: avoid — browsers either overflow
+  // it or push it whole to the next page, leaving a blank gap, then break it
+  // anyway at an arbitrary point. After the final layout (content revealed,
+  // animations jumped), find elements taller than a page that still compute
+  // break-inside: avoid and reset them to auto, so the browser breaks them at
+  // their children's boundaries instead (children keep their own avoid). PAGE_PX
+  // is a conservative portrait estimate at 96 CSS px/in — Letter/A4 usable
+  // height minus our 0.5in margins — so only clearly-oversized elements are
+  // touched and under-page elements still stay whole. Skipped for decks (slides
+  // are sized to the page) and for fixed-size canvases (frame set, or an author
+  // px-based @page) — runs as before for flowing docs on letter/A4.
+  try {
+    if (!ds && !frame && !(__m && __m.signals && __m.signals.pxPage)) {
+      const PAGE_PX = 1024;
+      // Our print defaults add a real @page margin only when the source has
+      // no @page of its own; computed style can't tell us (it reports screen
+      // media), so read the injected rule directly.
+      const defaults = document.querySelector('style[data-omelette-print-defaults]');
+      const pageInset = /@page\s*\{[^}]*margin/.test(defaults ? defaults.textContent || '' : '');
+      const SEL = 'section,article,figure,table,pre,blockquote,[class~="card" i],[class~="page" i],[class~="sheet" i]';
+      for (const el of document.body.querySelectorAll(SEL)) {
+        if (el instanceof HTMLElement && el.offsetHeight > PAGE_PX) {
+          el.setAttribute('data-om-oversized', '');
+          // Fake-paged docs simulate sheets with over-tall break-after:page
+          // boxes; honoring the break spills half-blank pages and ends a
+          // colored box mid-sheet. Flow them, and (only when we own the page
+          // inset) drop the redundant padding/background via the rule below.
+          const cs = getComputedStyle(el);
+          // An owns-print doc's forced breaks are intentional sheet
+          // boundaries, never fake-paged simulation — don't strip them.
+          // The break-inside relaxation above still applies: avoid on a
+          // >page element is impossible to honor whoever authored it.
+          if (
+            !ownsPrint &&
+            (cs.breakAfter === 'page' || cs.pageBreakAfter === 'always')
+          ) {
+            el.setAttribute('data-om-fakepage', '');
+          }
+        }
+      }
+      const ost = document.createElement('style');
+      ost.textContent = '@media print{' +
+        '[data-om-oversized]{break-inside:auto !important;page-break-inside:auto !important}' +
+        '[data-om-fakepage]{break-after:auto !important;page-break-after:auto !important}' +
+        (pageInset ? '[data-om-fakepage]{padding:0 !important;background:none !important}' : '') +
+        '}';
+      document.head.appendChild(ost);
+    }
+  } catch (e) {}
+  // macOS Preview renders Skia-PDF Luminosity soft-masks as opaque grey boxes;
+  // swap the CSS that triggers them for Preview-safe forms.
+  try {
+    for (const el of document.body.querySelectorAll('*')) {
+      const cs = getComputedStyle(el);
+
+      if (cs.boxShadow !== 'none' && cs.filter === 'none') {
+        const outs = [], kept = [];
+        for (const s of cs.boxShadow.split(/,(?![^(]*[)])/)) {
+          const t = s.trim();
+          const m = t.match(/^(rgba?[(][^)]+[)]) (-?[0-9.]+px) (-?[0-9.]+px) ([0-9.]+px) -?[0-9.]+px$/);
+          if (m && parseFloat(m[4]) > 0) outs.push('drop-shadow(' + m[2] + ' ' + m[3] + ' ' + m[4] + ' ' + m[1] + ')');
+          else kept.push(t);
+        }
+        if (outs.length) {
+          el.style.setProperty('filter', outs.join(' '), 'important');
+          el.style.setProperty('box-shadow', kept.join(', ') || 'none', 'important');
+        }
+      }
+
+      const mask = cs.maskImage && cs.maskImage !== 'none' ? cs.maskImage : cs.webkitMaskImage;
+      if (mask && mask !== 'none' && cs.filter === 'none') el.style.setProperty('filter', 'opacity(1)', 'important');
+    }
+  } catch (e) {}
+  setTimeout(() => { try { window.print(); } catch (e) {} }, 200);
+})();
+</script>
+</body>
+</html>

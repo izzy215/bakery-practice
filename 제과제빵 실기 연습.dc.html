@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F1E7;font-family:'Noto Sans KR',sans-serif;color:#3B2E22;-webkit-font-smoothing:antialiased}
+a{color:#A05A24}a:hover{color:#7C4218}
+button{font-family:'Noto Sans KR',sans-serif}
+</style>
+</helmet>
+
+<div id="app-root" style="max-width:1000px;margin:0 auto;padding:28px 20px 80px">
+
+  <header style="display:flex;flex-direction:column;gap:6px;margin-bottom:26px">
+    <div style="font-size:13px;font-weight:700;color:#A05A24;letter-spacing:2px">제과·제빵기능사 실기</div>
+    <h1 style="margin:0;font-size:28px;font-weight:900;letter-spacing:-0.5px">실기시험 연습 모형</h1>
+    <p style="margin:0;font-size:14px;color:#8A7360">공개문제 40품목 · 시험지 재현 · 공정 카드 · 퀴즈 · 합격 공략</p>
+  </header>
+
+  <sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="품목 목록">
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px">
+      <button onClick="{{drawGwa}}" style="flex:1;min-width:160px;border:none;border-radius:14px;padding:16px 18px;background:#A0511E;color:#FFF6EC;font-size:16px;font-weight:700;cursor:pointer;text-align:left" style-hover="background:#83400F">
+        제과 랜덤 출제
+        <span style="display:block;font-size:12px;font-weight:400;opacity:.85;margin-top:3px">시험 당일처럼 20품목 중 1개 추첨</span>
+      </button>
+      <button onClick="{{drawBbang}}" style="flex:1;min-width:160px;border:none;border-radius:14px;padding:16px 18px;background:#6E6118;color:#FCF8E8;font-size:16px;font-weight:700;cursor:pointer;text-align:left" style-hover="background:#584D0F">
+        제빵 랜덤 출제
+        <span style="display:block;font-size:12px;font-weight:400;opacity:.85;margin-top:3px">시험 당일처럼 20품목 중 1개 추첨</span>
+      </button>
+      <a href="모형 카드 모음 (전체 인쇄).dc.html" style="flex:1;min-width:160px;border:1.5px solid #C89B6B;border-radius:14px;padding:16px 18px;background:#FFFDF9;color:#8A4A15;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none" style-hover="border-color:#A0511E;background:#FDF6EE">
+        인쇄용 모형 카드 모음
+        <span style="display:block;font-size:12px;font-weight:400;color:#8A7360;margin-top:3px">40품목 카드를 한 번에 인쇄</span>
+      </a>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:16px">
+      <sc-for list="{{filterTabs}}" as="ft" hint-placeholder-count="3">
+        <sc-if value="{{ft.active}}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ft.go}}" style="border:1.5px solid #3B2E22;background:#3B2E22;color:#F7F1E7;border-radius:99px;padding:8px 18px;font-size:14px;font-weight:700;cursor:pointer">{{ft.label}}</button>
+        </sc-if>
+        <sc-if value="{{ft.inactive}}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ft.go}}" style="border:1.5px solid #D9CBB6;background:#FFFDF9;color:#6B5A48;border-radius:99px;padding:8px 18px;font-size:14px;font-weight:500;cursor:pointer" style-hover="border-color:#A98F70">{{ft.label}}</button>
+        </sc-if>
+      </sc-for>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:12px">
+      <sc-for list="{{cards}}" as="c" hint-placeholder-count="8">
+        <div onClick="{{c.open}}" style="background:#FFFDF9;border:1px solid #E8DCC9;border-radius:14px;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:9px" style-hover="border-color:#C89B6B;box-shadow:0 4px 16px rgba(120,80,40,.12)">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <sc-if value="{{c.isGwa}}" hint-placeholder-val="{{ true }}">
+              <span style="font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:99px;background:#F3E1CD;color:#8A4A15">제과</span>
+            </sc-if>
+            <sc-if value="{{c.isBread}}" hint-placeholder-val="{{ false }}">
+              <span style="font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:99px;background:#EBE6CB;color:#6A5D12">제빵</span>
+            </sc-if>
+            <sc-if value="{{c.detailed}}" hint-placeholder-val="{{ false }}">
+              <span style="font-size:11px;font-weight:700;color:#3E7A3E;background:#E4EEDF;padding:3px 9px;border-radius:99px">상세 완료</span>
+            </sc-if>
+            <sc-if value="{{c.pending}}" hint-placeholder-val="{{ true }}">
+              <span style="font-size:11px;font-weight:500;color:#9A8B77;background:#F1EADF;padding:3px 9px;border-radius:99px">준비중</span>
+            </sc-if>
+          </div>
+          <div style="font-size:16.5px;font-weight:700;line-height:1.3">{{c.name}}</div>
+          <div style="font-size:12.5px;color:#8A7360">{{c.time}} · {{c.method}}</div>
+          <sc-if value="{{showDiff}}" hint-placeholder-val="{{ true }}">
+            <div style="font-size:11px;color:#B06A34;letter-spacing:2px">난이도 {{c.dots}}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <p style="margin:26px 0 0;font-size:12px;color:#A79680">큐넷(Q-net) 공개문제 기준으로 정리한 연습용 모형입니다. 시험시간·세부 요구사항은 시행처 공지에 따라 변경될 수 있으니 응시 전 최신 공개문제를 꼭 확인하세요.</p>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{isDetail}}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="품목 상세">
+
+    <button onClick="{{goHome}}" style="border:none;background:none;color:#A05A24;font-size:14px;font-weight:700;cursor:pointer;padding:0;margin-bottom:16px" style-hover="color:#7C4218">← 전체 품목으로</button>
+
+    <div style="background:#FFFDF9;border:1px solid #E8DCC9;border-radius:16px;padding:22px;margin-bottom:18px">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <sc-if value="{{iIsGwa}}" hint-placeholder-val="{{ true }}">
+          <span style="font-size:12px;font-weight:700;padding:4px 12px;border-radius:99px;background:#F3E1CD;color:#8A4A15">제과기능사</span>
+        </sc-if>
+        <sc-if value="{{iIsBread}}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:12px;font-weight:700;padding:4px 12px;border-radius:99px;background:#EBE6CB;color:#6A5D12">제빵기능사</span>
+        </sc-if>
+        <h2 style="margin:0;font-size:24px;font-weight:900">{{iName}}</h2>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+        <span style="font-size:13px;background:#F1EADF;border-radius:8px;padding:6px 12px">시험시간 <strong>{{iTime}}</strong></span>
+        <span style="font-size:13px;background:#F1EADF;border-radius:8px;padding:6px 12px">제법 <strong>{{iMethod}}</strong></span>
+        <sc-if value="{{iHasTemp}}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:13px;background:#F1EADF;border-radius:8px;padding:6px 12px">반죽온도 <strong>{{iTemp}}</strong></span>
+        </sc-if>
+        <sc-if value="{{iHasGravity}}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:13px;background:#F1EADF;border-radius:8px;padding:6px 12px">비중 <strong>{{iGravity}}</strong></span>
+        </sc-if>
+        <span style="font-size:13px;background:#F1EADF;border-radius:8px;padding:6px 12px;color:#B06A34;letter-spacing:1px">난이도 {{iDots}}</span>
+      </div>
+      <p style="margin:14px 0 0;font-size:14px;color:#6B5A48">{{iSummary}}</p>
+      <sc-if value="{{iHasPrintKit}}" hint-placeholder-val="{{ false }}">
+        <a href="{{iPrintHref}}" style="display:inline-block;margin-top:14px;font-size:13.5px;font-weight:700;text-decoration:none;border:1.5px solid #A05A24;border-radius:10px;padding:8px 14px" style-hover="background:#A05A24;color:#FFF6EC">인쇄용 베이킹 모형 카드 →</a>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{iPending}}" hint-placeholder-val="{{ false }}">
+      <div style="background:#F8EFDF;border:1px dashed #CBB48F;border-radius:14px;padding:24px;text-align:center;font-size:14.5px;color:#7A6448">
+        이 품목의 상세 모형(시험지·공정·퀴즈·공략)은 다음 단계에서 채워집니다.<br>먼저 <strong>파운드케이크</strong>에서 전체 구성을 확인해 보세요.
+      </div>
+    </sc-if>
+
+    <sc-if value="{{iDetailed}}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px">
+        <sc-for list="{{tabBtns}}" as="tb" hint-placeholder-count="4">
+          <sc-if value="{{tb.active}}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{tb.go}}" style="border:none;background:#3B2E22;color:#F7F1E7;border-radius:10px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer">{{tb.label}}</button>
+          </sc-if>
+          <sc-if value="{{tb.inactive}}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{tb.go}}" style="border:none;background:#EFE7D8;color:#6B5A48;border-radius:10px;padding:10px 18px;font-size:14px;font-weight:500;cursor:pointer" style-hover="background:#E5D9C4">{{tb.label}}</button>
+          </sc-if>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{tabSheet}}" hint-placeholder-val="{{ true }}">
+        <div data-screen-label="시험지 모형" style="background:#FFFFFF;border:1.5px solid #2E2A24;padding:30px 28px;font-family:'Nanum Myeongjo',serif;box-shadow:0 6px 24px rgba(60,40,20,.08)">
+          <div style="text-align:center;font-size:21px;font-weight:800;letter-spacing:8px;border-bottom:2px solid #2E2A24;padding-bottom:14px">국가기술자격 실기시험문제</div>
+          <table style="width:100%;border-collapse:collapse;margin-top:16px;font-size:14px">
+            <tbody>
+              <tr>
+                <td style="border:1px solid #2E2A24;padding:9px;background:#F4EEE2;width:96px;text-align:center">자격종목</td>
+                <td style="border:1px solid #2E2A24;padding:9px">{{iExamFull}}</td>
+                <td style="border:1px solid #2E2A24;padding:9px;background:#F4EEE2;width:96px;text-align:center">과제명</td>
+                <td style="border:1px solid #2E2A24;padding:9px;font-weight:700">{{iName}}</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid #2E2A24;padding:9px;background:#F4EEE2;text-align:center">시험시간</td>
+                <td style="border:1px solid #2E2A24;padding:9px" colSpan="{{three}}">{{iTime}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="font-size:16px;font-weight:800;margin:22px 0 10px">1. 요구사항</div>
+          <div style="font-size:14px;line-height:1.9">
+            <div style="margin-bottom:6px">※ 다음 요구사항대로 {{iName}}를 제조하여 제출하시오.</div>
+            <sc-for list="{{reqs}}" as="rq" hint-placeholder-count="6">
+              <div style="display:flex;gap:8px;margin-bottom:4px"><span style="min-width:22px">{{rq.num}})</span><span>{{rq.text}}</span></div>
+            </sc-for>
+          </div>
+
+          <div style="font-size:16px;font-weight:800;margin:24px 0 10px">2. 배합표</div>
+          <table style="width:100%;border-collapse:collapse;font-size:14px;max-width:480px">
+            <thead>
+              <tr>
+                <th style="border:1px solid #2E2A24;padding:8px;background:#F4EEE2;font-weight:700">재료명</th>
+                <th style="border:1px solid #2E2A24;padding:8px;background:#F4EEE2;font-weight:700;width:110px">비율(%)</th>
+                <th style="border:1px solid #2E2A24;padding:8px;background:#F4EEE2;font-weight:700;width:110px">무게(g)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ings}}" as="g" hint-placeholder-count="9">
+                <tr>
+                  <td style="border:1px solid #2E2A24;padding:7px 10px">{{g.n}}</td>
+                  <td style="border:1px solid #2E2A24;padding:7px 10px;text-align:center">{{g.r}}</td>
+                  <td style="border:1px solid #2E2A24;padding:7px 10px;text-align:center">{{g.w}}</td>
+                </tr>
+              </sc-for>
+              <tr>
+                <td style="border:1px solid #2E2A24;padding:7px 10px;background:#F4EEE2;font-weight:700">계</td>
+                <td style="border:1px solid #2E2A24;padding:7px 10px;text-align:center;background:#F4EEE2;font-weight:700">{{iTotalR}}</td>
+                <td style="border:1px solid #2E2A24;padding:7px 10px;text-align:center;background:#F4EEE2;font-weight:700">{{iTotalW}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{tabSteps}}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="공정 카드" style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{steps}}" as="st" hint-placeholder-count="8">
+            <div style="background:#FFFDF9;border:1px solid #E8DCC9;border-radius:14px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start">
+              <div style="min-width:34px;height:34px;border-radius:50%;background:#A0511E;color:#FFF6EC;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px">{{st.num}}</div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <span style="font-size:16px;font-weight:700">{{st.t}}</span>
+                  <sc-if value="{{st.hasBadge}}" hint-placeholder-val="{{ false }}">
+                    <span style="font-size:12px;font-weight:700;color:#8A4A15;background:#F3E1CD;border-radius:99px;padding:3px 10px">{{st.b}}</span>
+                  </sc-if>
+                </div>
+                <div style="font-size:14px;line-height:1.65;color:#5C4C3B">{{st.d}}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{tabQuiz}}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="퀴즈" style="display:flex;flex-direction:column;gap:22px">
+
+          <div style="background:#FFFDF9;border:1px solid #E8DCC9;border-radius:16px;padding:20px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+              <div style="font-size:17px;font-weight:800">배합표 빈칸 채우기</div>
+              <div style="display:flex;gap:6px">
+                <button onClick="{{revealAllQ}}" style="border:1px solid #D9CBB6;background:#FFFDF9;border-radius:8px;padding:6px 12px;font-size:12.5px;cursor:pointer;color:#6B5A48" style-hover="border-color:#A98F70">모두 공개</button>
+                <button onClick="{{hideAllQ}}" style="border:1px solid #D9CBB6;background:#FFFDF9;border-radius:8px;padding:6px 12px;font-size:12.5px;cursor:pointer;color:#6B5A48" style-hover="border-color:#A98F70">모두 가리기</button>
+              </div>
+            </div>
+            <p style="margin:0 0 14px;font-size:13px;color:#8A7360">비율과 무게를 먼저 소리 내어 말한 뒤, 칸을 눌러 확인하세요.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px">
+              <sc-for list="{{qIngs}}" as="qi" hint-placeholder-count="9">
+                <div onClick="{{qi.toggle}}" style="border:1px solid #E8DCC9;border-radius:10px;padding:11px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;background:#FFFDF9" style-hover="border-color:#C89B6B">
+                  <span style="font-size:14px;font-weight:700">{{qi.n}}</span>
+                  <sc-if value="{{qi.revealed}}" hint-placeholder-val="{{ false }}">
+                    <span style="font-size:13.5px;font-weight:700;color:#3E7A3E">{{qi.val}}</span>
+                  </sc-if>
+                  <sc-if value="{{qi.hidden}}" hint-placeholder-val="{{ true }}">
+                    <span style="font-size:12px;color:#B3A48C;background:#F1EADF;border-radius:6px;padding:3px 9px">? %·g</span>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:#FFFDF9;border:1px solid #E8DCC9;border-radius:16px;padding:20px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+              <div style="font-size:17px;font-weight:800">공정 순서 맞추기</div>
+              <button onClick="{{resetOrder}}" style="border:1px solid #D9CBB6;background:#FFFDF9;border-radius:8px;padding:6px 12px;font-size:12.5px;cursor:pointer;color:#6B5A48" style-hover="border-color:#A98F70">다시 섞기</button>
+            </div>
+            <p style="margin:0 0 14px;font-size:13px;color:#8A7360">아래 카드에서 첫 공정부터 순서대로 눌러 보세요.</p>
+
+            <sc-if value="{{hasPicked}}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px">
+                <sc-for list="{{pickedRows}}" as="pr" hint-placeholder-count="3">
+                  <sc-if value="{{pr.ok}}" hint-placeholder-val="{{ true }}">
+                    <div style="display:flex;gap:10px;align-items:center;border:1px solid #BBD3AF;background:#F0F6EB;border-radius:10px;padding:9px 13px;font-size:14px"><span style="font-weight:800;color:#3E7A3E;min-width:20px">{{pr.num}}</span><span style="font-weight:600">{{pr.title}}</span><span style="margin-left:auto;color:#3E7A3E;font-weight:800">✓</span></div>
+                  </sc-if>
+                  <sc-if value="{{pr.wrong}}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;gap:10px;align-items:center;border:1px solid #E3B3AB;background:#FAEEEB;border-radius:10px;padding:9px 13px;font-size:14px"><span style="font-weight:800;color:#B04A38;min-width:20px">{{pr.num}}</span><span style="font-weight:600">{{pr.title}}</span><span style="margin-left:auto;color:#B04A38;font-weight:800">✗</span></div>
+                  </sc-if>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{orderPerfect}}" hint-placeholder-val="{{ false }}">
+              <div style="border-radius:10px;background:#3E7A3E;color:#F0F6EB;padding:12px 16px;font-size:14.5px;font-weight:700;margin-bottom:14px">완벽해요! 공정 순서를 모두 맞혔습니다.</div>
+            </sc-if>
+            <sc-if value="{{orderFailed}}" hint-placeholder-val="{{ false }}">
+              <div style="border-radius:10px;background:#B04A38;color:#FAEEEB;padding:12px 16px;font-size:14.5px;font-weight:700;margin-bottom:14px">틀린 단계가 있어요. '다시 섞기'로 한 번 더 연습해 보세요.</div>
+            </sc-if>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{poolBtns}}" as="pb" hint-placeholder-count="5">
+                <button onClick="{{pb.pick}}" style="border:1.5px solid #D9CBB6;background:#FFFDF9;border-radius:10px;padding:10px 15px;font-size:14px;font-weight:600;cursor:pointer;color:#3B2E22" style-hover="border-color:#A0511E;color:#A0511E">{{pb.title}}</button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{tabTips}}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="합격 공략" style="display:flex;flex-direction:column;gap:14px">
+          <div style="background:#FFFDF9;border:1px solid #E8DCC9;border-radius:16px;padding:20px">
+            <div style="font-size:16px;font-weight:800;color:#A07A18;margin-bottom:10px">감점 포인트</div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <sc-for list="{{deductions}}" as="dd" hint-placeholder-count="6">
+                <div style="display:flex;gap:9px;font-size:14px;line-height:1.6;color:#5C4C3B"><span style="color:#A07A18;font-weight:800">–</span><span>{{dd.text}}</span></div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#FFFDF9;border:1px solid #E8DCC9;border-radius:16px;padding:20px">
+            <div style="font-size:16px;font-weight:800;color:#B04A38;margin-bottom:10px">실격 사유 (0점 처리)</div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <sc-for list="{{disqualify}}" as="dq" hint-placeholder-count="5">
+                <div style="display:flex;gap:9px;font-size:14px;line-height:1.6;color:#5C4C3B"><span style="color:#B04A38;font-weight:800">✕</span><span>{{dq.text}}</span></div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#FFFDF9;border:1px solid #E8DCC9;border-radius:16px;padding:20px">
+            <div style="font-size:16px;font-weight:800;color:#3E7A3E;margin-bottom:10px">합격 팁</div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <sc-for list="{{tips}}" as="tp" hint-placeholder-count="6">
+                <div style="display:flex;gap:9px;font-size:14px;line-height:1.6;color:#5C4C3B"><span style="color:#3E7A3E;font-weight:800">✓</span><span>{{tp.text}}</span></div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+    </sc-if>
+  </section>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;fontScale&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:1,&quot;max&quot;:1.4,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;표시&quot;},&quot;showDifficulty&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;표시&quot;}}">
+class Component extends DCLogic {
+  state = {
+    data: null, view: 'home', filter: '전체', sel: null, tab: 'sheet',
+    revealed: {}, pool: [], picked: []
+  };
+
+  componentDidMount() {
+    fetch('./items-data.json').then(r => r.json()).then(d => this.setState({ data: d.items }));
+    this.applyScale();
+  }
+  componentDidUpdate() { this.applyScale(); }
+  applyScale() {
+    const el = document.getElementById('app-root');
+    if (el) el.style.zoom = String(this.props.fontScale ?? 1);
+  }
+
+  shuffled(n) {
+    const a = Array.from({ length: n }, (_, i) => i);
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  open(id) {
+    const it = (this.state.data || []).find(x => x.id === id);
+    const pool = it && it.detailed ? this.shuffled(it.steps.length) : [];
+    this.setState({ view: 'detail', sel: id, tab: 'sheet', revealed: {}, pool, picked: [] });
+    window.scrollTo(0, 0);
+  }
+
+  draw(exam) {
+    const list = (this.state.data || []).filter(x => x.exam === exam);
+    if (!list.length) return;
+    this.open(list[Math.floor(Math.random() * list.length)].id);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const data = s.data || [];
+    const it = data.find(x => x.id === s.sel) || null;
+    const dots = d => '●'.repeat(d) + '○'.repeat(5 - d);
+
+    const filterTabs = ['전체', '제과', '제빵'].map(label => ({
+      label, active: s.filter === label, inactive: s.filter !== label,
+      go: () => this.setState({ filter: label })
+    }));
+
+    const cards = data
+      .filter(x => s.filter === '전체' || x.exam === s.filter)
+      .map(x => ({
+        name: x.name, exam: x.exam, time: x.time, method: x.method,
+        isGwa: x.exam === '제과', isBread: x.exam === '제빵',
+        detailed: !!x.detailed, pending: !x.detailed,
+        dots: dots(x.difficulty),
+        open: () => this.open(x.id)
+      }));
+
+    const tabDefs = [['sheet', '시험지'], ['steps', '공정 카드'], ['quiz', '퀴즈'], ['tips', '합격 공략']];
+    const tabBtns = tabDefs.map(([key, label]) => ({
+      label, active: s.tab === key, inactive: s.tab !== key,
+      go: () => this.setState({ tab: key })
+    }));
+
+    let detail = {};
+    if (it) {
+      const steps = it.steps || [];
+      const picked = s.picked;
+      const done = it.detailed && picked.length === steps.length && steps.length > 0;
+      const allOk = done && picked.every((idx, k) => idx === k);
+      detail = {
+        iName: it.name, iTime: it.time, iMethod: it.method, iSummary: it.summary,
+        iIsGwa: it.exam === '제과', iIsBread: it.exam === '제빵',
+        iExamFull: it.exam === '제과' ? '제과기능사' : '제빵기능사',
+        iHasTemp: !!it.temp, iTemp: it.temp || '',
+        iHasGravity: !!it.gravity, iGravity: it.gravity || '',
+        iDots: dots(it.difficulty),
+        iDetailed: !!it.detailed, iPending: !it.detailed,
+        iHasPrintKit: !!it.printKit,
+        iPrintHref: it.printKit || '',
+        iTotalR: it.totalR || '', iTotalW: it.totalW || '',
+        reqs: (it.requirements || []).map((text, i) => ({ num: i + 1, text })),
+        ings: it.ingredients || [],
+        steps: steps.map((st, i) => ({ ...st, num: i + 1, hasBadge: !!st.b })),
+        qIngs: (it.ingredients || []).map((g, i) => ({
+          n: g.n, val: g.r + '% · ' + g.w + 'g',
+          revealed: !!s.revealed[i], hidden: !s.revealed[i],
+          toggle: () => this.setState(p => ({ revealed: { ...p.revealed, [i]: !p.revealed[i] } }))
+        })),
+        revealAllQ: () => {
+          const all = {}; (it.ingredients || []).forEach((_, i) => all[i] = true);
+          this.setState({ revealed: all });
+        },
+        hideAllQ: () => this.setState({ revealed: {} }),
+        hasPicked: picked.length > 0,
+        pickedRows: picked.map((idx, k) => ({
+          num: k + 1, title: steps[idx].t, ok: idx === k, wrong: idx !== k
+        })),
+        poolBtns: s.pool.filter(i => !picked.includes(i)).map(i => ({
+          title: steps[i].t,
+          pick: () => this.setState(p => ({ picked: [...p.picked, i] }))
+        })),
+        orderPerfect: allOk,
+        orderFailed: done && !allOk,
+        resetOrder: () => this.setState({ pool: this.shuffled(steps.length), picked: [] }),
+        deductions: (it.deductions || []).map(text => ({ text })),
+        disqualify: (it.disqualify || []).map(text => ({ text })),
+        tips: (it.tips || []).map(text => ({ text }))
+      };
+    }
+
+    return {
+      isHome: s.view === 'home',
+      isDetail: s.view === 'detail' && !!it,
+      showDiff: this.props.showDifficulty ?? true,
+      three: 3,
+      filterTabs, cards, tabBtns,
+      tabSheet: s.tab === 'sheet', tabSteps: s.tab === 'steps',
+      tabQuiz: s.tab === 'quiz', tabTips: s.tab === 'tips',
+      drawGwa: () => this.draw('제과'),
+      drawBbang: () => this.draw('제빵'),
+      goHome: () => this.setState({ view: 'home' }),
+      ...detail
+    };
+  }
+}
+</script>
+</body>
+</html>

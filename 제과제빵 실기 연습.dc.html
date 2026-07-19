@@ -39,6 +39,10 @@ button{font-family:'Noto Sans KR',sans-serif}
         제빵 랜덤 출제
         <span style="display:block;font-size:12px;font-weight:400;opacity:.85;margin-top:3px">시험 당일처럼 20품목 중 1개 추첨</span>
       </button>
+      <a href="카드 연습.html" style="flex:1;min-width:160px;border:none;border-radius:14px;padding:16px 18px;background:#3B6E4A;color:#EFF6EC;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none" style-hover="background:#2E5A3A">
+        웹 카드 연습
+        <span style="display:block;font-size:12px;font-weight:400;opacity:.85;margin-top:3px">화면에서 카드를 드래그하며 공정·재료 연습</span>
+      </a>
       <a href="모형 카드 모음 (전체 인쇄).dc.html" style="flex:1;min-width:160px;border:1.5px solid #C89B6B;border-radius:14px;padding:16px 18px;background:#FFFDF9;color:#8A4A15;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none" style-hover="border-color:#A0511E;background:#FDF6EE">
         인쇄용 모형 카드 모음
         <span style="display:block;font-size:12px;font-weight:400;color:#8A7360;margin-top:3px">40품목 카드를 한 번에 인쇄</span>
@@ -113,9 +117,12 @@ button{font-family:'Noto Sans KR',sans-serif}
         <span style="font-size:13px;background:#F1EADF;border-radius:8px;padding:6px 12px;color:#B06A34;letter-spacing:1px">난이도 {{iDots}}</span>
       </div>
       <p style="margin:14px 0 0;font-size:14px;color:#6B5A48">{{iSummary}}</p>
-      <sc-if value="{{iHasPrintKit}}" hint-placeholder-val="{{ false }}">
-        <a href="{{iPrintHref}}" style="display:inline-block;margin-top:14px;font-size:13.5px;font-weight:700;text-decoration:none;border:1.5px solid #A05A24;border-radius:10px;padding:8px 14px" style-hover="background:#A05A24;color:#FFF6EC">인쇄용 베이킹 모형 카드 →</a>
-      </sc-if>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+        <a href="{{iCardHref}}" style="display:inline-block;font-size:13.5px;font-weight:700;text-decoration:none;border:1.5px solid #3B6E4A;color:#3B6E4A;border-radius:10px;padding:8px 14px" style-hover="background:#3B6E4A;color:#EFF6EC">웹 카드 연습 →</a>
+        <sc-if value="{{iHasPrintKit}}" hint-placeholder-val="{{ false }}">
+          <a href="{{iPrintHref}}" style="display:inline-block;font-size:13.5px;font-weight:700;text-decoration:none;border:1.5px solid #A05A24;border-radius:10px;padding:8px 14px" style-hover="background:#A05A24;color:#FFF6EC">인쇄용 베이킹 모형 카드 →</a>
+        </sc-if>
+      </div>
     </div>
 
     <sc-if value="{{iPending}}" hint-placeholder-val="{{ false }}">
@@ -388,6 +395,7 @@ class Component extends DCLogic {
         iDetailed: !!it.detailed, iPending: !it.detailed,
         iHasPrintKit: !!it.printKit,
         iPrintHref: it.printKit || '',
+        iCardHref: '카드 연습.html?item=' + it.id,
         iTotalR: it.totalR || '', iTotalW: it.totalW || '',
         reqs: (it.requirements || []).map((text, i) => ({ num: i + 1, text })),
         ings: it.ingredients || [],

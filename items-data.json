@@ -136,7 +136,8 @@
         "팬닝량을 저울로 통일하면 12개 크기가 균일해진다.",
         "오븐 앞뒤 온도차가 있으면 굽는 중반에 팬 위치를 돌려준다."
       ],
-      "printKit": "모형 카드.dc.html?item=choco-muffin"
+      "printKit": "모형 카드.dc.html?item=choco-muffin",
+      "video": "https://www.youtube.com/watch?v=p3ccdzOTIHM"
     },
     {
       "id": "sponge-separate",
@@ -266,7 +267,8 @@
         "비중컵 무게는 계량 때 미리 재두면 측정이 빠르다.",
         "흰자 볼에 기름기·노른자가 섞이면 머랭이 오르지 않으니 도구를 깨끗이 한다."
       ],
-      "printKit": "모형 카드.dc.html?item=sponge-separate"
+      "printKit": "모형 카드.dc.html?item=sponge-separate",
+      "video": "https://www.youtube.com/watch?v=qIWtfqlblv4"
     },
     {
       "id": "jelly-roll",
@@ -397,7 +399,8 @@
         "캐러멜 무늬는 본 반죽보다 살짝 되게 만들어야 번지지 않는다.",
         "잼은 끝부분 1~2cm를 남기고 발라야 말 때 밖으로 삐져나오지 않는다."
       ],
-      "printKit": "모형 카드.dc.html?item=jelly-roll"
+      "printKit": "모형 카드.dc.html?item=jelly-roll",
+      "video": "https://www.youtube.com/watch?v=5mOVza2NzpA"
     },
     {
       "id": "soft-roll",
@@ -533,7 +536,8 @@
         "면포에 물기를 넉넉히 주면 단면이 매끈하게 나온다.",
         "말기 직전 시트 끝에 칼집을 살짝 내면 첫 말이가 쉬워진다."
       ],
-      "printKit": "모형 카드.dc.html?item=soft-roll"
+      "printKit": "모형 카드.dc.html?item=soft-roll",
+      "video": "https://www.youtube.com/watch?v=lr1XYc9TLs8"
     },
     {
       "id": "sponge-together",
@@ -648,7 +652,8 @@
         "달걀 양이 많으므로 휘핑 시간이 길다 — 핸드믹서 배터리·속도 배분에 유의.",
         "비중이 무거우면 거품을 더 올리고, 가벼우면 살짝 정리한다."
       ],
-      "printKit": "모형 카드.dc.html?item=sponge-together"
+      "printKit": "모형 카드.dc.html?item=sponge-together",
+      "video": "https://www.youtube.com/watch?v=0ShXaLllxwI"
     },
     {
       "id": "madeleine",
@@ -768,7 +773,8 @@
         "레몬껍질은 흰 부분 없이 노란 부분만 갈아야 쓴맛이 없다.",
         "팬닝은 짤주머니로 무게를 통일하면 크기가 고르다."
       ],
-      "printKit": "모형 카드.dc.html?item=madeleine"
+      "printKit": "모형 카드.dc.html?item=madeleine",
+      "video": "https://www.youtube.com/watch?v=b3Lo-sCZ84g"
     },
     {
       "id": "shortbread",
@@ -901,7 +907,8 @@
         "남은 자투리는 뭉쳐 다시 밀되 과도하게 치대지 않는다.",
         "굽는 색은 가장자리만 옅게 — 전체가 진하면 감점이다."
       ],
-      "printKit": "모형 카드.dc.html?item=shortbread"
+      "printKit": "모형 카드.dc.html?item=shortbread",
+      "video": "https://www.youtube.com/watch?v=snbslIcPyo0"
     },
     {
       "id": "choux",
@@ -1014,7 +1021,8 @@
         "굽는 중 문을 열면 찬 공기로 즉시 주저앉으니 절대 금지.",
         "충분히 부풀고 색이 난 뒤 꺼내야 식어도 꺼지지 않는다."
       ],
-      "printKit": "모형 카드.dc.html?item=choux"
+      "printKit": "모형 카드.dc.html?item=choux",
+      "video": "https://www.youtube.com/watch?v=dYr1lUV2QwI"
     },
     {
       "id": "brownie",
@@ -1148,7 +1156,8 @@
         "중탕 볼에 물방울이 들어가면 초콜릿이 굳으니 주의.",
         "이쑤시개로 찔러 촉촉한 부스러기가 묻어나오는 정도가 적당하다."
       ],
-      "printKit": "모형 카드.dc.html?item=brownie"
+      "printKit": "모형 카드.dc.html?item=brownie",
+      "video": "https://www.youtube.com/watch?v=GXskgbI6CuM"
     },
     {
       "id": "fruit-cake",
@@ -1296,7 +1305,8 @@
         "머랭과 가루를 번갈아 넣어 무거운 반죽의 거품 손실을 줄인다.",
         "굽는 시간이 길어 윗면이 빨리 타면 위치를 바꾸거나 온도를 낮춘다."
       ],
-      "printKit": "모형 카드.dc.html?item=fruit-cake"
+      "printKit": "모형 카드.dc.html?item=fruit-cake",
+      "video": "https://www.youtube.com/watch?v=1A_wRdqcl1I"
     },
     {
       "id": "pound-cake",
@@ -1433,7 +1443,8 @@
         "칼집은 껍질이 '얇게 막 형성된' 시점에 — 너무 빠르면 퍼지고, 늦으면 터짐이 지저분하다.",
         "스패출러에 식용유를 발라 팬 길이 방향으로 한 번에 긋기, 깊이 약 1cm.",
         "굽기 후반 색이 빨리 나면 윗불을 낮추고 은박지 덮기보다 위치 교체가 안전하다."
-      ]
+      ],
+      "video": "https://www.youtube.com/watch?v=Nvr1XY3jsdA"
     },
     {
       "id": "dacquoise",
@@ -1546,7 +1557,8 @@
         "너무 진하게 구우면 특유의 촉촉함이 사라지니 옅은 색으로.",
         "크림은 완전히 식은 뒤 샌드해야 녹지 않는다."
       ],
-      "printKit": "모형 카드.dc.html?item=dacquoise"
+      "printKit": "모형 카드.dc.html?item=dacquoise",
+      "video": "https://www.youtube.com/watch?v=JKwImylHo8Y"
     },
     {
       "id": "tart",
@@ -1685,7 +1697,8 @@
         "아랫불을 충분히 줘야 바닥까지 바삭하게 익는다.",
         "광택제는 뜨거울 때 발라야 얇고 고르게 퍼진다."
       ],
-      "printKit": "모형 카드.dc.html?item=tart"
+      "printKit": "모형 카드.dc.html?item=tart",
+      "video": "https://www.youtube.com/watch?v=5RSp4TpCTwk"
     },
     {
       "id": "blackrice-roll",
@@ -1811,7 +1824,8 @@
         "생크림은 손휘핑이므로 얼음물에 볼을 받쳐 단단하게 올린다.",
         "크림을 너무 두껍게 바르면 말 때 옆으로 밀려 무너진다."
       ],
-      "printKit": "모형 카드.dc.html?item=blackrice-roll"
+      "printKit": "모형 카드.dc.html?item=blackrice-roll",
+      "video": "https://www.youtube.com/watch?v=-RVbn2TiaKI"
     },
     {
       "id": "chiffon",
@@ -1935,7 +1949,8 @@
         "식용유가 들어가 촉촉하지만 거품이 약하니 혼합을 최소화한다.",
         "완전히 식기 전에 팬에서 빼면 옆면이 뜯긴다."
       ],
-      "printKit": "모형 카드.dc.html?item=chiffon"
+      "printKit": "모형 카드.dc.html?item=chiffon",
+      "video": "https://www.youtube.com/watch?v=Ad5LwgpMKsE"
     },
     {
       "id": "madeira",
@@ -2069,7 +2084,8 @@
         "달걀은 나누어 넣어 분리를 막는다.",
         "팬닝은 무게를 통일해 컵 크기를 고르게 한다."
       ],
-      "printKit": "모형 카드.dc.html?item=madeira"
+      "printKit": "모형 카드.dc.html?item=madeira",
+      "video": "https://www.youtube.com/watch?v=Yrsn6kdOKCs"
     },
     {
       "id": "butter-cookie",
@@ -2177,7 +2193,8 @@
         "굽는 색은 가장자리만 옅게 — 전체가 진하면 감점.",
         "짜기 무늬가 뭉개지면 반죽 온도가 높은 것이니 잠시 식힌다."
       ],
-      "printKit": "모형 카드.dc.html?item=butter-cookie"
+      "printKit": "모형 카드.dc.html?item=butter-cookie",
+      "video": "https://www.youtube.com/watch?v=CiMxw4zT20w"
     },
     {
       "id": "cheesecake",
@@ -2306,7 +2323,8 @@
         "머랭은 젖은 봉우리까지만 — 과하면 표면이 갈라진다.",
         "레몬주스는 치즈 특유의 느끼함을 잡아주니 정량을 지킨다."
       ],
-      "printKit": "모형 카드.dc.html?item=cheesecake"
+      "printKit": "모형 카드.dc.html?item=cheesecake",
+      "video": "https://www.youtube.com/watch?v=Sz_A6j1Cl9o"
     },
     {
       "id": "walnut-pie",
@@ -2454,7 +2472,8 @@
         "아랫불을 충분히 줘야 바닥이 눅지 않고 바삭하다.",
         "충전물은 팬 높이보다 살짝 낮게 부어 넘침을 막는다."
       ],
-      "printKit": "모형 카드.dc.html?item=walnut-pie"
+      "printKit": "모형 카드.dc.html?item=walnut-pie",
+      "video": "https://www.youtube.com/watch?v=4FQWCpyKZfI"
     },
     {
       "id": "choco-roll",
@@ -2595,7 +2614,8 @@
         "면포에 물기를 주면 단면이 매끈하고 덜 찢어진다.",
         "가나슈를 너무 두껍게 바르면 말 때 옆으로 밀려 무너진다."
       ],
-      "printKit": "모형 카드.dc.html?item=choco-roll"
+      "printKit": "모형 카드.dc.html?item=choco-roll",
+      "video": "https://www.youtube.com/watch?v=lwBC21gOVPc"
     },
     {
       "id": "donut",
@@ -2739,7 +2759,8 @@
         "계피설탕은 살짝 식은(따뜻한) 상태에서 묻혀야 잘 붙는다.",
         "넛메그는 도넛 특유의 향 — 빠뜨리지 말고 정량을 넣는다."
       ],
-      "printKit": "모형 카드.dc.html?item=donut"
+      "printKit": "모형 카드.dc.html?item=donut",
+      "video": "https://www.youtube.com/watch?v=rhwExVAEucM"
     },
     {
       "id": "sausage-bread",
@@ -2903,7 +2924,8 @@
         "가위집을 너무 깊게 내면 구울 때 벌어져 소시지가 빠진다.",
         "2차 발효를 과하게 하면 성형이 뭉개지니 적당히."
       ],
-      "printKit": "모형 카드.dc.html?item=sausage-bread"
+      "printKit": "모형 카드.dc.html?item=sausage-bread",
+      "video": "https://www.youtube.com/watch?v=BELfEoSjI6Y"
     },
     {
       "id": "bread-emergency",
@@ -3031,7 +3053,8 @@
         "4개 1조는 무게를 통일해야 봉우리 높이가 고르다.",
         "2차 발효 판단이 관건 — 팬 위로 1~2cm 올라오면 굽는다."
       ],
-      "printKit": "모형 카드.dc.html?item=bread-emergency"
+      "printKit": "모형 카드.dc.html?item=bread-emergency",
+      "video": "https://www.youtube.com/watch?v=8H8_KzAFbI8"
     },
     {
       "id": "redbean-emergency",
@@ -3169,7 +3192,8 @@
         "중앙 누름은 손가락에 덧가루를 묻혀 바닥까지 눌러야 모양이 유지된다.",
         "달걀물은 얇게 발라야 색이 얼룩지지 않는다."
       ],
-      "printKit": "모형 카드.dc.html?item=redbean-emergency"
+      "printKit": "모형 카드.dc.html?item=redbean-emergency",
+      "video": "https://www.youtube.com/watch?v=TXV6iVui4_E"
     },
     {
       "id": "grissini",
@@ -3297,7 +3321,8 @@
         "가늘어 빨리 익으니 색을 자주 확인한다.",
         "반죽을 과발전시키면 질겨지니 적당히 반죽한다."
       ],
-      "printKit": "모형 카드.dc.html?item=grissini"
+      "printKit": "모형 카드.dc.html?item=grissini",
+      "video": "https://www.youtube.com/watch?v=yD1tEn-SC3Y"
     },
     {
       "id": "chestnut-bread",
@@ -3440,7 +3465,8 @@
         "토핑이 있어 윗불을 낮게 — 색이 빨리 나면 위치를 바꾼다.",
         "아몬드슬라이스는 토핑 위에 골고루 얹어 눌러 붙인다."
       ],
-      "printKit": "모형 카드.dc.html?item=chestnut-bread"
+      "printKit": "모형 카드.dc.html?item=chestnut-bread",
+      "video": "https://www.youtube.com/watch?v=0rHUeW69WaY"
     },
     {
       "id": "bagel",
@@ -3563,7 +3589,8 @@
         "된 반죽이라 반죽이 힘들다 — 글루텐을 충분히 발전시킨다.",
         "데친 뒤 물기를 살짝 빼고 바로 구워야 광택이 산다."
       ],
-      "printKit": "모형 카드.dc.html?item=bagel"
+      "printKit": "모형 카드.dc.html?item=bagel",
+      "video": "https://www.youtube.com/watch?v=Dm0X-0-Pgew"
     },
     {
       "id": "sweet-roll",
@@ -3706,7 +3733,8 @@
         "계피설탕을 과하게 뿌리면 말 때 미끄러지고 풀린다.",
         "2차 발효가 길면 말린 부분이 튀어나오니 적당히."
       ],
-      "printKit": "모형 카드.dc.html?item=sweet-roll"
+      "printKit": "모형 카드.dc.html?item=sweet-roll",
+      "video": "https://www.youtube.com/watch?v=dFSmdATAVXE"
     },
     {
       "id": "milk-bread",
@@ -3829,7 +3857,8 @@
         "2차 발효는 팬 위로 1~2cm 올라올 때가 적기.",
         "우유 유당으로 색이 빨리 나니 윗불 관리에 유의."
       ],
-      "printKit": "모형 카드.dc.html?item=milk-bread"
+      "printKit": "모형 카드.dc.html?item=milk-bread",
+      "video": "https://www.youtube.com/watch?v=21AGWd1HECk"
     },
     {
       "id": "twist-bun",
@@ -3962,7 +3991,8 @@
         "이음매를 아래로 두어야 구울 때 풀리지 않는다.",
         "달걀물은 얇게 발라 얼룩을 방지한다."
       ],
-      "printKit": "모형 카드.dc.html?item=twist-bun"
+      "printKit": "모형 카드.dc.html?item=twist-bun",
+      "video": "https://www.youtube.com/watch?v=zLVn-RItfMQ"
     },
     {
       "id": "cream-bun",
@@ -4100,7 +4130,8 @@
         "크림이 넘치면 굽는 중 타서 감점되니 정량을 지킨다.",
         "달걀물은 얇게 발라 얼룩을 방지한다."
       ],
-      "printKit": "모형 카드.dc.html?item=cream-bun"
+      "printKit": "모형 카드.dc.html?item=cream-bun",
+      "video": "https://www.youtube.com/watch?v=tpuiXVChhhU"
     },
     {
       "id": "pullman",
@@ -4233,7 +4264,8 @@
         "성형 시 가스를 충분히 빼야 큰 기공이 없다.",
         "2개를 팬 양끝에 균형 있게 놓아야 고르게 부푼다."
       ],
-      "printKit": "모형 카드.dc.html?item=pullman"
+      "printKit": "모형 카드.dc.html?item=pullman",
+      "video": "https://www.youtube.com/watch?v=YmGHBrbvzhA"
     },
     {
       "id": "soboro",
@@ -4371,7 +4403,8 @@
         "토핑을 손바닥으로 살짝 눌러 붙여야 굽는 중 떨어지지 않는다.",
         "제과+제빵 혼합형 — 시간 배분(계량 11분)을 잘 관리한다."
       ],
-      "printKit": "모형 카드.dc.html?item=soboro"
+      "printKit": "모형 카드.dc.html?item=soboro",
+      "video": "https://www.youtube.com/watch?v=XbzleyhYV1U"
     },
     {
       "id": "rice-bread",
@@ -4504,7 +4537,8 @@
         "3봉은 무게를 통일해 봉우리를 고르게 한다.",
         "2차 발효 판단을 보수적으로 — 살짝 부족한 듯에서 굽는다."
       ],
-      "printKit": "모형 카드.dc.html?item=rice-bread"
+      "printKit": "모형 카드.dc.html?item=rice-bread",
+      "video": "https://www.youtube.com/watch?v=P33Y3qiD-uw"
     },
     {
       "id": "rye-bread",
@@ -4642,7 +4676,8 @@
         "럭비공은 양끝을 살짝 뾰족하게 잡아 모양을 낸다.",
         "칼집을 깊게 내면 퍼지고 얕으면 안 벌어지니 적당히."
       ],
-      "printKit": "모형 카드.dc.html?item=rye-bread"
+      "printKit": "모형 카드.dc.html?item=rye-bread",
+      "video": "https://www.youtube.com/watch?v=wWtOjtogG_M"
     },
     {
       "id": "butter-top",
@@ -4780,7 +4815,8 @@
         "버터는 가른 홈을 따라 일정하게 짠다.",
         "물 흡수가 관건 — 계량을 정확히 하고 반죽 되기를 확인한다."
       ],
-      "printKit": "모형 카드.dc.html?item=butter-top"
+      "printKit": "모형 카드.dc.html?item=butter-top",
+      "video": "https://www.youtube.com/watch?v=N7gKc6ZuQdY"
     },
     {
       "id": "corn-bread",
@@ -4918,7 +4954,8 @@
         "3봉은 무게를 통일해 봉우리를 고르게.",
         "반죽은 밀식빵보다 조금 덜 발전시켜 끈기를 유지한다."
       ],
-      "printKit": "모형 카드.dc.html?item=corn-bread"
+      "printKit": "모형 카드.dc.html?item=corn-bread",
+      "video": "https://www.youtube.com/watch?v=s5OZQQ6RZ0U"
     },
     {
       "id": "mocha-bread",
@@ -5061,7 +5098,8 @@
         "커피는 소량의 물에 완전히 녹여 넣어야 얼룩이 없다.",
         "계량 시간(11분)이 기니 순서를 미리 정한다."
       ],
-      "printKit": "모형 카드.dc.html?item=mocha-bread"
+      "printKit": "모형 카드.dc.html?item=mocha-bread",
+      "video": "https://www.youtube.com/watch?v=ocxTAneRVQE"
     },
     {
       "id": "butter-roll",
@@ -5194,7 +5232,8 @@
         "이음매를 아래로 두어 풀림을 막는다.",
         "달걀물은 얇게 발라 결이 묻히지 않게."
       ],
-      "printKit": "모형 카드.dc.html?item=butter-roll"
+      "printKit": "모형 카드.dc.html?item=butter-roll",
+      "video": "https://www.youtube.com/watch?v=ddHvIZazXN8"
     },
     {
       "id": "wholewheat",
@@ -5337,7 +5376,8 @@
         "통밀가루는 강력분과 함께 체 쳐 뭉침을 없앤다.",
         "반죽을 곱게 밀어 말아야 막대 표면이 매끈하다."
       ],
-      "printKit": "모형 카드.dc.html?item=wholewheat"
+      "printKit": "모형 카드.dc.html?item=wholewheat",
+      "video": "https://www.youtube.com/watch?v=5A2b8jKB5jw"
     }
   ]
 }

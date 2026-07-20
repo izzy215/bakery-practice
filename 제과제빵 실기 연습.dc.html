@@ -123,7 +123,7 @@ button{font-family:'Noto Sans KR',sans-serif}
         <sc-if value="{{iHasPrintKit}}" hint-placeholder-val="{{ false }}">
           <a href="{{iPrintHref}}" style="display:inline-block;font-size:13.5px;font-weight:700;text-decoration:none;border:1.5px solid #A05A24;border-radius:10px;padding:8px 14px" style-hover="background:#A05A24;color:#FFF6EC">인쇄용 베이킹 모형 카드 →</a>
         </sc-if>
-        <a href="https://www.youtube.com/@barbershop_bakery" target="_blank" rel="noopener" style="display:inline-block;font-size:13.5px;font-weight:700;text-decoration:none;border:1.5px solid #C0392B;color:#C0392B;border-radius:10px;padding:8px 14px" style-hover="background:#C0392B;color:#FFF6EC">▶ 유튜브 강의</a>
+        <a href="{{iVideoHref}}" target="_blank" rel="noopener" style="display:inline-block;font-size:13.5px;font-weight:700;text-decoration:none;border:1.5px solid #C0392B;background:#C0392B;color:#FFF6EC;border-radius:10px;padding:8px 14px" style-hover="background:#96281B;border-color:#96281B">▶ {{iVideoLabel}}</a>
       </div>
     </div>
 
@@ -398,6 +398,8 @@ class Component extends DCLogic {
         iHasPrintKit: !!it.printKit,
         iPrintHref: it.printKit || '',
         iCardHref: '카드 연습.html?item=' + it.id,
+        iVideoHref: it.video || 'https://www.youtube.com/@barbershop_bakery',
+        iVideoLabel: it.video ? '이 품목 영상 보기' : '유튜브 강의',
         iTotalR: it.totalR || '', iTotalW: it.totalW || '',
         reqs: (it.requirements || []).map((text, i) => ({ num: i + 1, text })),
         ings: it.ingredients || [],

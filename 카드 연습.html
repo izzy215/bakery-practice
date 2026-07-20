@@ -448,7 +448,10 @@ function renderHome() {
     }).join('');
 
   root.innerHTML =
+    '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">' +
     '<a class="top-link" href="제과제빵 실기 연습.dc.html">← 연습 앱으로</a>' +
+    '<a href="https://www.youtube.com/@barbershop_bakery" target="_blank" rel="noopener" style="font-size:13px;font-weight:700;color:#C0392B;text-decoration:none">▶ 유튜브 강의</a>' +
+    '</div>' +
     '<h1 class="page">카드 연습 <span style="font-size:14px;font-weight:500;color:#8A7360">웹 실습 보드</span></h1>' +
     '<p class="sub">인쇄 없이 화면에서 카드를 드래그하며 공정 순서와 단계별 재료·도구를 연습합니다.</p>' +
     '<div class="bigbtns" style="margin-top:18px">' +
@@ -482,7 +485,7 @@ function renderPractice() {
     '<h2 style="margin:0;font-size:22px;font-weight:900">' + esc(it.name) + '</h2>' +
     '</div>' +
     '<div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;align-items:center">' + chips +
-    '<span style="font-size:12.5px;color:#8A7360;margin-left:auto"><a href="제과제빵 실기 연습.dc.html" style="font-size:12.5px">시험지·퀴즈</a>' + printLink + '</span>' +
+    '<span style="font-size:12.5px;color:#8A7360;margin-left:auto"><a href="제과제빵 실기 연습.dc.html" style="font-size:12.5px">시험지·퀴즈</a>' + printLink + ' · <a href="https://www.youtube.com/@barbershop_bakery" target="_blank" rel="noopener" style="font-size:12.5px;color:#C0392B">유튜브 강의</a></span>' +
     '</div>' +
     '</div>' +
     '<div class="tabs">' +

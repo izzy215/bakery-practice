@@ -57,6 +57,17 @@ A안 파일을 복제해 수정하는 방식. 각 품목마다:
 5. 앱 데이터 갱신은 `items-data.json`만 수정 (run_script + JSON.parse/stringify 병합 권장, 손 편집 시 유효 JSON 유지).
 6. 스타일은 전부 인라인. 시험지 모형은 'Nanum Myeongjo', 본문은 'Noto Sans KR'.
 
+## 배포 (중요 — 반드시 이 절차로)
+
+Cloudflare Pages 직접 업로드(`bakery-practice`). **작업 폴더를 그대로 deploy 하지 말 것** — `학습자료/`의 공단 저작물 PDF가 공개 배포되는 사고가 있었음(2026-09, 해당 deployment 삭제로 수습). 항상 git 커밋본만 스테이징해서 배포:
+
+```
+git archive HEAD | tar -x -C <스테이징폴더>
+npx wrangler pages deploy <스테이징폴더> --project-name bakery-practice --branch main --commit-dirty=true
+```
+
+`학습자료/`는 .gitignore에 등록되어 있어 git archive에 포함되지 않음. GitHub 자동배포는 동작하지 않는 상태(수동 배포 필요).
+
 ## 검증
 
 - 각 배치 후 `ready_for_verification`으로 앱 열어 확인 (해당 품목 상세 4탭 + 퀴즈 동작).

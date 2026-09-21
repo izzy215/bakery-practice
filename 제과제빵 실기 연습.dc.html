@@ -193,6 +193,18 @@ button{font-family:'Noto Sans KR',sans-serif}
                 <td style="border:1px solid #2E2A24;padding:7px 10px;text-align:center;background:#F4EEE2;font-weight:700">{{iTotalR}}</td>
                 <td style="border:1px solid #2E2A24;padding:7px 10px;text-align:center;background:#F4EEE2;font-weight:700">{{iTotalW}}</td>
               </tr>
+              <sc-if value="{{hasFilling}}" hint-placeholder-val="{{ false }}">
+                <tr>
+                  <td colSpan="{{three}}" style="border:1px solid #2E2A24;padding:6px 10px;font-size:12.5px;color:#5C4C3B">※ 충전용 재료는 계량시간에서 제외</td>
+                </tr>
+                <sc-for list="{{fillings}}" as="fl" hint-placeholder-count="1">
+                  <tr>
+                    <td style="border:1px solid #2E2A24;padding:7px 10px">{{fl.n}}</td>
+                    <td style="border:1px solid #2E2A24;padding:7px 10px;text-align:center">{{fl.r}}</td>
+                    <td style="border:1px solid #2E2A24;padding:7px 10px;text-align:center">{{fl.w}}</td>
+                  </tr>
+                </sc-for>
+              </sc-if>
             </tbody>
           </table>
         </div>
@@ -384,6 +396,7 @@ class Component extends DCLogic {
     let detail = {};
     if (it) {
       const steps = it.steps || [];
+      const quizIngs = (it.ingredients || []).concat(it.filling || []);
       const picked = s.picked;
       const done = it.detailed && picked.length === steps.length && steps.length > 0;
       const allOk = done && picked.every((idx, k) => idx === k);
@@ -403,14 +416,16 @@ class Component extends DCLogic {
         iTotalR: it.totalR || '', iTotalW: it.totalW || '',
         reqs: (it.requirements || []).map((text, i) => ({ num: i + 1, text })),
         ings: it.ingredients || [],
+        fillings: it.filling || [],
+        hasFilling: !!(it.filling && it.filling.length),
         steps: steps.map((st, i) => ({ ...st, num: i + 1, hasBadge: !!st.b })),
-        qIngs: (it.ingredients || []).map((g, i) => ({
+        qIngs: quizIngs.map((g, i) => ({
           n: g.n, val: g.r + '% · ' + g.w + 'g',
           revealed: !!s.revealed[i], hidden: !s.revealed[i],
           toggle: () => this.setState(p => ({ revealed: { ...p.revealed, [i]: !p.revealed[i] } }))
         })),
         revealAllQ: () => {
-          const all = {}; (it.ingredients || []).forEach((_, i) => all[i] = true);
+          const all = {}; quizIngs.forEach((_, i) => all[i] = true);
           this.setState({ revealed: all });
         },
         hideAllQ: () => this.setState({ revealed: {} }),

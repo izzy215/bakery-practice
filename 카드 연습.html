@@ -238,7 +238,7 @@ const TOOL_ICONS = {
 const norm = name => String(name || '').replace(/\s*\([^)]*\)\s*/g, '').trim();
 
 const ING_KEY_MAP = {
-  '박력분':'flour','중력분':'flour','강력분':'flour','박력쌀가루':'riceflour','쌀가루':'riceflour',
+  '박력분':'flour','중력분':'flour','강력분':'flour','박력쌀가루':'riceflour','쌀가루':'riceflour','흑미쌀가루':'riceflour',
   '설탕':'sugar','분당':'powdersugar',
   '버터':'butter','용해버터':'butter','마가린':'margarine','쇼트닝':'shortening','유화제':'emul',
   '달걀':'egg','달걀흰자':'white','흰자':'white','노른자':'yolk',
@@ -248,9 +248,9 @@ const ING_KEY_MAP = {
   '다크초콜릿':'chocolate','코코아파우더':'cocoa','호두':'walnut',
   '건포도':'raisin','체리':'cherry','오렌지필':'orange','레몬껍질':'lemon',
   '럼':'wine','적포도주':'wine','생크림':'cream','물엿':'syrup','식용유':'oil',
-  '커스터드크림':'custard','버터크림':'buttercream','캐러멜색소':'colorant','살구잼':'jam',
+  '커스터드크림':'custard','커스터드 크림':'custard','버터크림':'buttercream','캐러멜색소':'colorant','살구잼':'jam','잼':'jam','에프리코트혼당':'jam','브랜디':'wine',
   '크림치즈':'creamcheese','레몬주스':'lemon','럼주':'wine','계핏가루':'cinnamon','계피가루':'cinnamon',
-  '다크커버추어':'chocolate','커버추어':'chocolate',
+  '다크커버추어':'chocolate','다크커버츄어':'chocolate','커버추어':'chocolate',
   '생이스트':'yeast','이스트':'yeast','제빵개량제':'improver','제빵 개량제':'improver',
   '통팥앙금':'anko','팥앙금':'anko','앙금':'anko','흰앙금':'anko',
   '옥수수분말':'corn','옥수숫가루':'corn','옥수수가루':'corn',
@@ -366,13 +366,17 @@ function expectedFor(i) {
   const st = S.kit.stations[i] || {};
   let ings;
   if (st.ing === 'ALL') {
-    ings = S.item.ingredients.map((_, k) => k);
+    ings = Array.from({ length: S.mainIngCount ?? S.item.ingredients.length }, (_, k) => k);
   } else {
     ings = [];
     (st.ing || []).forEach(nm => {
-      const target = ING_ALIAS[norm(nm)] || nm;
-      let k = S.item.ingredients.findIndex(g => g.n === target || norm(g.n) === norm(target));
-      if (k < 0) k = S.item.ingredients.findIndex(g => norm(g.n).includes(norm(target)) || norm(target).includes(norm(g.n)));
+      // 원래 이름 우선 매칭 (배합표에 노른자가 직접 있는 품목), 없으면 별칭(달걀)으로
+      let k = S.item.ingredients.findIndex(g => g.n === nm || norm(g.n) === norm(nm));
+      if (k < 0) {
+        const target = ING_ALIAS[norm(nm)] || nm;
+        k = S.item.ingredients.findIndex(g => g.n === target || norm(g.n) === norm(target));
+        if (k < 0) k = S.item.ingredients.findIndex(g => norm(g.n).includes(norm(target)) || norm(target).includes(norm(g.n)));
+      }
       if (k >= 0 && !ings.includes(k)) ings.push(k);
     });
   }
@@ -404,7 +408,9 @@ function initStations() {
 function openItem(id, mode) {
   const it = S.items.find(x => x.id === id);
   if (!it || !it.detailed) { toast('이 품목은 아직 상세 데이터가 없습니다'); return; }
-  S.item = it;
+  // 충전용 재료도 카드로 포함 (계량 스테이션 ALL은 본반죽 재료까지만)
+  S.item = Object.assign({}, it, { ingredients: (it.ingredients || []).concat(it.filling || []) });
+  S.mainIngCount = (it.ingredients || []).length;
   S.kit = S.kits[id] || null;
   S.mode = (mode === 'station' && S.kit) ? 'station' : 'order';
   S.view = 'practice';

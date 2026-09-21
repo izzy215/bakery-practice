@@ -325,7 +325,7 @@ class Component extends DCLogic {
   ingKey(name) {
     const n = this.norm(name);
     const map = {
-      '박력분':'flour','중력분':'flour','강력분':'flour','박력쌀가루':'riceflour','쌀가루':'riceflour',
+      '박력분':'flour','중력분':'flour','강력분':'flour','박력쌀가루':'riceflour','쌀가루':'riceflour','흑미쌀가루':'riceflour',
       '설탕':'sugar','분당':'powdersugar',
       '버터':'butter','용해버터':'butter','마가린':'margarine','쇼트닝':'shortening',
       '달걀':'egg','달걀흰자':'white','흰자':'white','노른자':'yolk',
@@ -335,9 +335,9 @@ class Component extends DCLogic {
       '다크초콜릿':'chocolate','코코아파우더':'cocoa','호두':'walnut',
       '건포도':'raisin','체리':'cherry','오렌지필':'orange','레몬껍질':'lemon',
       '럼':'wine','적포도주':'wine','생크림':'cream','물엿':'syrup','식용유':'oil',
-      '커스터드크림':'custard','버터크림':'buttercream','캐러멜색소':'colorant','살구잼':'jam',
+      '커스터드크림':'custard','커스터드 크림':'custard','버터크림':'buttercream','캐러멜색소':'colorant','살구잼':'jam','잼':'jam','에프리코트혼당':'jam','브랜디':'wine',
       '크림치즈':'creamcheese','레몬주스':'lemon','럼주':'wine','계핏가루':'cinnamon','계피가루':'cinnamon',
-      '다크커버추어':'chocolate','커버추어':'chocolate',
+      '다크커버추어':'chocolate','다크커버츄어':'chocolate','커버추어':'chocolate',
       '생이스트':'yeast','이스트':'yeast','제빵개량제':'improver','제빵 개량제':'improver',
       '통팥앙금':'anko','팥앙금':'anko','앙금':'anko','흰앙금':'anko',
       '옥수수분말':'corn','옥수숫가루':'corn','옥수수가루':'corn',
@@ -385,7 +385,8 @@ class Component extends DCLogic {
 
     if (!it) return { ...base, iName: '로딩 중', iExamFull: '', iTime: '', iMethod: '', ingCount: 0, toolCount: 0, stepCount: 0, ingCards: [], toolCards: [], stepCards: [], ingSlots: [], stepSlots: [], answerLine: '', bakeInfo: '', checkInfo: '', stations: [], answers: [] };
 
-    const ings = it.ingredients || [];
+    const mainIngs = it.ingredients || [];
+    const ings = mainIngs.concat(it.filling || []);
     const steps = it.steps || [];
     const tools = (kit && kit.tools) || [];
     const stepHints = ['계량', '반죽', '', '', '', '', '팬닝', '굽기'];
@@ -404,7 +405,7 @@ class Component extends DCLogic {
       stations = kit.stations.map((st, i) => {
         const stepT = steps[i] ? steps[i].t : ('단계 ' + (i + 1));
         const stepB = steps[i] ? steps[i].b : '';
-        const ingList = st.ing === 'ALL' ? ings.map(g => g.n) : (st.ing || []);
+        const ingList = st.ing === 'ALL' ? mainIngs.map(g => g.n) : (st.ing || []);
         const toolList = st.tools || [];
         return {
           num: i + 1, name: stepT,
@@ -437,7 +438,7 @@ class Component extends DCLogic {
       ingCards: ings.map(g => ({ ...g, iconSrc: ingIcon(g.n) })),
       toolCards: tools.map(n => ({ n, iconSrc: toolIcon(n) })),
       stepCards: steps.map(st => ({ ...st, hasBadge: !!st.b, iconSrc: this.stepIcon(st.t) })),
-      ingSlots: ings.map((_, i) => ({ num: i + 1 })),
+      ingSlots: mainIngs.map((_, i) => ({ num: i + 1 })),
       stepSlots: steps.map((_, i) => ({ num: i + 1, hint: stepHints[i] || '' })),
       answerLine: steps.map((st, i) => (i + 1) + ' ' + st.t).join('  →  '),
       bakeInfo, checkInfo: checks.join('<br>'),
